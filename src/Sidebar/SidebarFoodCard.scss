@@ -1,10 +1,32 @@
 .sidebar-food-card {
   width: 100%;
   height: fit-content;
+
+  .ant-card-body {
+    padding: 10px 5px;
+  }
 }
 
-.sidebar-food-card-close-button {
+.sidebar-food-card__close-button {
   * {
     color: #99a4a5;
+  }
+}
+
+.sidebar-food-card__body {
+  * {
+    text-align: center;
+  }
+}
+
+.sidebar-food-card__serving-input {
+  width: 100%;
+
+  .ant-input-number-handler-wrap {
+    display: none;
+  }
+
+  .ant-input-number-input {
+    padding: 0;
   }
 }
