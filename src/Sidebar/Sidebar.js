@@ -79,26 +79,23 @@ function Sidebar() {
 }
 
 function foodItemWithHighlights(foodItem, substringToHighlight) {
+  const caseInsensitiveGlobalSearch = new RegExp(substringToHighlight, "ig");
   const saltedFoodItem = _.replace(
     foodItem.trim(),
-    new RegExp(substringToHighlight, "gi"),
+    caseInsensitiveGlobalSearch,
     (text) => `<=>${text}<=>`
   );
 
   const splitText = saltedFoodItem.split("<=>");
-  let isHighlighting = false;
 
-  return splitText.map((substring) => {
-    let foodItemOptionPart;
+  return splitText.map((substring, index) => {
+    const isHighlighting = index % 2 === 1;
 
     if (isHighlighting) {
-      foodItemOptionPart = <span className="highlighted">{substring}</span>;
-    } else {
-      foodItemOptionPart = substring;
+      return <span className="highlighted">{substring}</span>;
     }
 
-    isHighlighting = !isHighlighting;
-    return foodItemOptionPart;
+    return substring;
   });
 }
 
