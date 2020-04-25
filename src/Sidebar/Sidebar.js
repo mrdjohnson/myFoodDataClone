@@ -33,7 +33,7 @@ function Sidebar() {
       const foodResponseItems = data.trim().split(",");
 
       setSearchValue(foodSearchString);
-      setFoodItems(foodResponseItems);
+      setFoodItems(foodResponseItems.map(_.trim));
       setNoContent(foodSearchString && _.isEmpty(foodResponseItems));
     });
   }, 300);
@@ -81,7 +81,7 @@ function Sidebar() {
 function foodItemWithHighlights(foodItem, substringToHighlight) {
   const caseInsensitiveGlobalSearch = new RegExp(substringToHighlight, "ig");
   const saltedFoodItem = _.replace(
-    foodItem.trim(),
+    foodItem,
     caseInsensitiveGlobalSearch,
     (text) => `<=>${text}<=>`
   );
@@ -92,7 +92,11 @@ function foodItemWithHighlights(foodItem, substringToHighlight) {
     const isHighlighting = index % 2 === 1;
 
     if (isHighlighting) {
-      return <span className="highlighted">{substring}</span>;
+      return (
+        <span key={index} className="highlighted">
+          {substring}
+        </span>
+      );
     }
 
     return substring;
