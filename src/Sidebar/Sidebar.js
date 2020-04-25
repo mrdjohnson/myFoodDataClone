@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import AppContext from "../AppContext";
 
-import { Layout, Select, Spin } from "antd";
-import { Input } from "antd";
+import { Layout, Select } from "antd";
+import SidebarFoodList from "./SidebarFoodList";
 
 import Axios from "axios";
-
 import _ from "lodash";
 
 import "./Sidebar.scss";
@@ -16,9 +16,11 @@ function Sidebar() {
   const [foodItems, setFoodItems] = useState([]);
   const [noContent, setNoContent] = useState(false);
 
-  const fetchFoodItem = _.debounce((foodSearchString) => {
+  const { fetchFoodItemData } = useContext(AppContext);
+
+  const searchFoodItems = _.debounce((foodSearchString) => {
     setFoodItems([]);
-    
+
     if (_.isEmpty(foodSearchString)) {
       setSearchValue(undefined);
       setNoContent(false);
@@ -36,8 +38,15 @@ function Sidebar() {
     });
   }, 300);
 
-  const updateSearchedValue = (value) => {
-    setSearchValue(_.isEmpty(value) ? null : value);
+  const updateSearchedValue = (searchedFoodItem) => {
+    console.log("selected: ", searchedFoodItem);
+
+    if (_.isEmpty(searchedFoodItem)) {
+      setSearchValue(undefined);
+    } else {
+      setSearchValue(searchedFoodItem);
+      fetchFoodItemData(searchedFoodItem);
+    }
   };
 
   const renderHighlightedFoodItem = (foodItem) => {
@@ -58,27 +67,30 @@ function Sidebar() {
         placeholder="🔍 Find Another Food"
         notFoundContent={noContent}
         filterOption={false}
-        onSearch={fetchFoodItem}
+        onSearch={searchFoodItems}
         onChange={updateSearchedValue}
         className="sidebar-searchbar"
       >
         {foodItems.map(renderHighlightedFoodItem)}
       </Select>
+      <SidebarFoodList />
     </Layout>
   );
 }
 
 function foodItemWithHighlights(foodItem, substringToHighlight) {
   const saltedFoodItem = _.replace(
-    foodItem,
+    foodItem.trim(),
     new RegExp(substringToHighlight, "gi"),
     (text) => `<=>${text}<=>`
   );
+
   const splitText = saltedFoodItem.split("<=>");
   let isHighlighting = false;
 
   return splitText.map((substring) => {
     let foodItemOptionPart;
+
     if (isHighlighting) {
       foodItemOptionPart = <span className="highlighted">{substring}</span>;
     } else {

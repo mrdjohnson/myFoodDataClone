@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import logo from "./logo.svg";
 
 import Sidebar from "./Sidebar/Sidebar";
 
-import { Layout, Menu } from "antd";
+import { Layout } from "antd";
 import "./App.scss";
 
 const { Header, Content, Footer, Sider } = Layout;
@@ -39,7 +39,7 @@ function App() {
         <a href="https://www.myfooddata.com/faq.php"> FAQ |</a>
         <a href="https://www.myfooddata.com/sitemap.php"> Sitemap</a>
       </div>
-      <div class="app-footer-copyright">© 2020 MyFoodData.com</div>
+      <div className="app-footer-copyright">© 2020 MyFoodData.com</div>
     </>
   );
 
