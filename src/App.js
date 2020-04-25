@@ -9,25 +9,6 @@ import "./App.scss";
 const { Header, Content, Footer, Sider } = Layout;
 
 function App() {
-  const content = (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-
   const AppFooter = () => (
     <>
       <div className="app-footer-links">
@@ -51,7 +32,7 @@ function App() {
           <Sidebar />
         </Sider>
 
-        <Content>{content}</Content>
+        <Content></Content>
       </Layout>
 
       <Footer className="app-footer">
