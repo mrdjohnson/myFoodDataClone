@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import logo from "./logo.svg";
 
+import Sidebar from "./Sidebar/Sidebar";
+
 import { Layout, Menu } from "antd";
 import "./App.scss";
 
@@ -45,7 +47,10 @@ function App() {
     <Layout style={{ minHeight: "100vh" }}>
       <Header className="header">Header</Header>
       <Layout>
-        <Sider className="gray-theme">Sider</Sider>
+        <Sider width={310}>
+          <Sidebar />
+        </Sider>
+
         <Content>{content}</Content>
       </Layout>
 
