@@ -1,5 +1,4 @@
 import React from "react";
-import logo from "./logo.svg";
 
 import Sidebar from "./Sidebar/Sidebar";
 import NutritionFactsTable from "./NutritionFacts/NutritionFactsTable";
