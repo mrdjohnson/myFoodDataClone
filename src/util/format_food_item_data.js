@@ -13,7 +13,8 @@ function formatFoodItemData(
 
   return {
     ...foodItemData,
-    name: foodItemData["names"][0],
+    id: foodItemData.ndbstring,
+    name: foodItemData.names[0],
     nutritionFactTable,
   };
 }

@@ -21,15 +21,16 @@ function SidebarFoodCard({ foodItemData }) {
 
   const servingDescriptions = foodItemData["desc_arr"];
   const servingWeights = foodItemData["wt_arr"].map(_.toInteger);
-  const servings = _.zip(servingDescriptions, servingWeights);
-
-  const [selectedServing, setSelectedServing] = useState(
-    _.first(servingDescriptions)
+  const servings = _.zip(servingDescriptions, servingWeights).map(
+    ([description, weight]) => `${description} (${weight}g)`
   );
 
+  const [selectedWeightIndex, setSelectedWeightIndex] = useState(0);
+  const selectedWeight = servings[selectedWeightIndex];
+
   useEffect(() => {
-    setSelectedServing(_.first(servingDescriptions));
-  }, [servingDescriptions]);
+    setSelectedWeightIndex(0);
+  }, [foodItemData.id]);
 
   const closeButton = (
     <Tooltip title="close">
@@ -42,15 +43,11 @@ function SidebarFoodCard({ foodItemData }) {
     </Tooltip>
   );
 
-  const renderServing = (serving, index) => {
-    const [description, weight] = serving;
-
-    return (
-      <Option value={index} key={description}>
-        {description} {`(${weight}g)`}
-      </Option>
-    );
-  };
+  const renderServing = (serving, index) => (
+    <Option value={index} key={serving}>
+      {serving}
+    </Option>
+  );
 
   const updateQuantity = (selectedQuantity) => {
     if (MIN_QUANTITY < selectedQuantity && selectedQuantity < MAX_QUANTITY) {
@@ -60,6 +57,7 @@ function SidebarFoodCard({ foodItemData }) {
 
   const updateSelectedWeight = (selectedWeightIndex) => {
     updateFoodItemDataNutritionFactTable({ selectedWeightIndex });
+    setSelectedWeightIndex(selectedWeightIndex);
   };
 
   return (
@@ -86,7 +84,7 @@ function SidebarFoodCard({ foodItemData }) {
 
         <Col span={20}>
           <Select
-            value={selectedServing}
+            value={selectedWeight}
             style={{ width: "100%" }}
             dropdownMatchSelectWidth={false}
             onChange={updateSelectedWeight}
