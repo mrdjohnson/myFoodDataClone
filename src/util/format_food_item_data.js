@@ -5,7 +5,7 @@ function formatFoodItemData(
   selectedQuantity = 1,
   selectedWeightIndex = 0
 ) {
-  const nutritionFactTable = calculateNutritionalFacts(
+  const nutritionFactTable = calculateNutritionalFactTable(
     foodItemData,
     selectedQuantity,
     selectedWeightIndex
@@ -18,7 +18,7 @@ function formatFoodItemData(
   };
 }
 
-function calculateNutritionalFacts(
+export function calculateNutritionalFactTable(
   foodItemData,
   selectedQuantity,
   selectedWeightIndex
@@ -65,7 +65,7 @@ function nutritionFactsFromFoodData(
     const base = _.toNumber(foodItemData[key]) * ratio * selectedQuantity;
 
     return {
-      value: Math.round(base * 10) / 10,
+      value: Math.round((base * 10) / 10),
       percentage: Math.round((base / (1.0 * divsor)) * 100),
     };
   };

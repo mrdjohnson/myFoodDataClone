@@ -10,8 +10,14 @@ import "./SidebarFoodCard.scss";
 
 const { Option } = Select;
 
+const MIN_QUANTITY = 1;
+const MAX_QUANTITY = 10000;
+
 function SidebarFoodCard({ foodItemData }) {
-  const { clearFoodItemData } = useContext(AppContext);
+  const {
+    clearFoodItemData,
+    updateFoodItemDataNutritionFactTable,
+  } = useContext(AppContext);
 
   const servingDescriptions = foodItemData["desc_arr"];
   const servingWeights = foodItemData["wt_arr"].map(_.toInteger);
@@ -36,17 +42,25 @@ function SidebarFoodCard({ foodItemData }) {
     </Tooltip>
   );
 
-  const renderServing = (serving) => {
+  const renderServing = (serving, index) => {
     const [description, weight] = serving;
 
     return (
-      <Option value={weight} key={description}>
+      <Option value={index} key={description}>
         {description} {`(${weight}g)`}
       </Option>
     );
   };
 
-  const handleChange = () => {};
+  const updateQuantity = (selectedQuantity) => {
+    if (MIN_QUANTITY < selectedQuantity && selectedQuantity < MAX_QUANTITY) {
+      updateFoodItemDataNutritionFactTable({ selectedQuantity });
+    }
+  };
+
+  const updateSelectedWeight = (selectedWeightIndex) => {
+    updateFoodItemDataNutritionFactTable({ selectedWeightIndex });
+  };
 
   return (
     <Card
@@ -58,9 +72,10 @@ function SidebarFoodCard({ foodItemData }) {
       <Row className="sidebar-food-card__body" align="middle">
         <Col span={2}>
           <InputNumber
-            min={1}
-            defaultValue={3}
-            onChange={handleChange}
+            min={MIN_QUANTITY}
+            max={MAX_QUANTITY}
+            defaultValue={1}
+            onChange={updateQuantity}
             className="sidebar-food-card__serving-input"
           />
         </Col>
@@ -74,7 +89,7 @@ function SidebarFoodCard({ foodItemData }) {
             value={selectedServing}
             style={{ width: "100%" }}
             dropdownMatchSelectWidth={false}
-            onChange={setSelectedServing}
+            onChange={updateSelectedWeight}
           >
             {servings.map(renderServing)}
           </Select>

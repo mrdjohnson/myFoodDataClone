@@ -2,7 +2,9 @@ import React, { createContext, useState, useEffect } from "react";
 import Axios from "axios";
 
 import appleExample from "./fixtures/apple.json";
-import formatFoodItemData from "./util/format_food_item_data";
+import formatFoodItemData, {
+  calculateNutritionalFactTable,
+} from "./util/format_food_item_data";
 
 const AppContext = createContext();
 
@@ -28,6 +30,22 @@ export const AppProvider = ({ children }) => {
     });
   }
 
+  function updateFoodItemDataNutritionFactTable({
+    selectedQuantity = 1,
+    selectedWeightIndex = 0,
+  }) {
+    const nutritionFactTable = calculateNutritionalFactTable(
+      foodItemData,
+      selectedQuantity,
+      selectedWeightIndex
+    );
+
+    setFoodItemData({
+      ...foodItemData,
+      nutritionFactTable,
+    });
+  }
+
   const clearFoodItemData = () => setFoodItemData(null);
 
   return (
@@ -36,6 +54,7 @@ export const AppProvider = ({ children }) => {
         foodItemData,
         fetchFoodItemData,
         clearFoodItemData,
+        updateFoodItemDataNutritionFactTable,
       }}
     >
       {children}
