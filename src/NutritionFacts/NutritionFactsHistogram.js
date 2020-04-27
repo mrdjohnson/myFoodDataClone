@@ -35,9 +35,9 @@ export default function NutritionFactsHistogram() {
 
   return (
     informationPresent && (
-      <div class="histograms">
-        <div class="data-title">What is this food made of?</div>
-        <div class="data-tile">
+      <div className="histograms">
+        <div className="data-title">What is this food made of?</div>
+        <div className="data-tile">
           <Row style={{ height: "368px" }} align="bottom">
             <Col className="water" style={{ height: `${waterPercentage}%` }} />
 
