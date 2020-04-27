@@ -1,0 +1,28 @@
+.facts-panel {
+  font-family: sans-serif;
+  max-width: 650px;
+  text-align: center;
+  font-size: 16px;
+}
+
+.facts-panel-header {
+  box-sizing: border-box;
+  color: #333;
+  font-weight: 600;
+  font-size: 35px;
+  margin: 10px 0 0 0;
+  line-height: initial;
+}
+
+.facts-panel-subheader {
+  box-sizing: border-box;
+  font-size: 14px;
+  color: #999;
+  line-height: 15px;
+  padding-bottom: 8px;
+}
+
+.facts-panel-body {
+  padding-top: 20px;
+  padding-left: 20px;
+}
