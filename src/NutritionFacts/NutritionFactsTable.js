@@ -39,7 +39,6 @@ function NutritionFactsTable() {
       );
     }
 
-    debugger;
     return (
       <Row className="no-sugar-added">
         <span>Includes {addedSugar.value}g Added Sugars</span>
