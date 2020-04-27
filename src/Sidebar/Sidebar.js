@@ -14,7 +14,6 @@ const { Option } = Select;
 function Sidebar() {
   const [searchValue, setSearchValue] = useState();
   const [foodItems, setFoodItems] = useState([]);
-  const [noContent, setNoContent] = useState(false);
 
   const { fetchFoodItemData } = useContext(AppContext);
 
@@ -23,7 +22,6 @@ function Sidebar() {
 
     if (_.isEmpty(foodSearchString)) {
       setSearchValue(undefined);
-      setNoContent(false);
       return;
     }
 
@@ -34,7 +32,6 @@ function Sidebar() {
 
       setSearchValue(foodSearchString);
       setFoodItems(foodResponseItems.map(_.trim));
-      setNoContent(foodSearchString && _.isEmpty(foodResponseItems));
     });
   }, 300);
 
@@ -65,7 +62,7 @@ function Sidebar() {
         showArrow={false}
         value={searchValue}
         placeholder="🔍 Find Another Food"
-        notFoundContent={noContent}
+        notFoundContent={false}
         filterOption={false}
         onSearch={searchFoodItems}
         onChange={updateSearchedValue}
