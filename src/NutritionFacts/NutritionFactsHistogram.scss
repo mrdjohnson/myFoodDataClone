@@ -20,7 +20,7 @@
 
 .data-tile {
   border: 2px solid #777;
-  background-color: #f0f1f0;
+  // background-color: #f0f1f0;
   border-radius: 5px;
 }
 
@@ -50,6 +50,7 @@
     padding: 10px 0 10px 0;
     line-height: initial;
     border-right: 2px solid #777;
+    background-color: whitesmoke;
 
     :first-child {
       font-size: 20px;

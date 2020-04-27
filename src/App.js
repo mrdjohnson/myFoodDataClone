@@ -1,8 +1,9 @@
 import React from "react";
 
 import Sidebar from "./Sidebar/Sidebar";
-import NutritionFactsTable from "./NutritionFacts/NutritionFactsTable";
-import NutritionFactsHistogram from "./NutritionFacts/NutritionFactsHistogram";
+import NutritionFactsPanel from "./NutritionFacts/NutritionFactsPanel";
+
+import logo from "./assets/logo.svg";
 
 import { Layout } from "antd";
 import "./App.scss";
@@ -27,16 +28,24 @@ function App() {
 
   return (
     <Layout style={{ minHeight: "100vh" }}>
-      <Header className="header">Header</Header>
-      
+      <Header className="header">
+        <a href="https://www.myfooddata.com">
+          <img
+            className="header-logo"
+            src={logo}
+            alt="my food data"
+            height="100%"
+          />
+        </a>
+      </Header>
+
       <Layout>
         <Sider width={310}>
           <Sidebar />
         </Sider>
 
         <Content>
-          <NutritionFactsTable />
-          <NutritionFactsHistogram />
+          <NutritionFactsPanel />
         </Content>
       </Layout>
 
