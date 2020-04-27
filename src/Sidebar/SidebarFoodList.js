@@ -7,6 +7,8 @@ import AppContext from "../AppContext";
 function SideBarFoodList() {
   const { foodItemData } = useContext(AppContext);
 
+  if (!foodItemData) return null;
+
   const renderListItem = (item) => (
     <List.Item key={item.name}>
       <SidebarFoodCard foodItemData={item} />

@@ -1,0 +1,74 @@
+import _ from "lodash";
+
+function formatFoodItemData(
+  foodItemData,
+  selectedQuantity = 1,
+  selectedWeightIndex = 0
+) {
+  const nutritionFactTable = calculateNutritionalFacts(
+    foodItemData,
+    selectedQuantity,
+    selectedWeightIndex
+  );
+
+  return {
+    ...foodItemData,
+    name: foodItemData["names"][0],
+    nutritionFactTable,
+  };
+}
+
+function calculateNutritionalFacts(
+  foodItemData,
+  selectedQuantity,
+  selectedWeightIndex
+) {
+  const nutritionFactsByKey = nutritionFactsFromFoodData(
+    foodItemData,
+    selectedQuantity,
+    selectedWeightIndex
+  );
+
+  return {
+    calories: nutritionFactsByKey("ENERC_KCAL", 2000),
+    totalFat: nutritionFactsByKey("FAT", 65),
+    saturatedFat: nutritionFactsByKey("FASAT", 20),
+    transFat: nutritionFactsByKey("FATRN"),
+    cholesterol: nutritionFactsByKey("CHOLE", 300),
+    sodium: nutritionFactsByKey("NA", 2400),
+    totalCarbohydrates: nutritionFactsByKey("CHOCDF", 300),
+    fiber: nutritionFactsByKey("FIBTG", 25),
+    sugar: nutritionFactsByKey("SUGAR", 50),
+    addedSugar: nutritionFactsByKey("ADD_SG", 50),
+    protein: nutritionFactsByKey("PROCNT", 50),
+    vitaminC: nutritionFactsByKey("VITC", 90),
+    vitaminD: nutritionFactsByKey("VITD", 20),
+    iron: nutritionFactsByKey("FE", 18),
+    calcium: nutritionFactsByKey("CA", 1300),
+    potassium: nutritionFactsByKey("K", 4700),
+    phosphorus: nutritionFactsByKey("P", 1250),
+  };
+}
+
+const missingData = { value: "~", percentage: "~" };
+
+function nutritionFactsFromFoodData(
+  foodItemData,
+  selectedQuantity,
+  selectedWeightIndex
+) {
+  const ratio = _.toNumber(foodItemData.wt_arr[selectedWeightIndex]) / 100;
+
+  return (key, divsor = 1) => {
+    if (!foodItemData[key][0]) return missingData;
+
+    const base = _.toNumber(foodItemData[key]) * ratio * selectedQuantity;
+
+    return {
+      value: Math.round(base * 10) / 10,
+      percentage: Math.round((base / (1.0 * divsor)) * 100),
+    };
+  };
+}
+
+export default formatFoodItemData;

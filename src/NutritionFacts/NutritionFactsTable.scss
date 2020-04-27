@@ -1,0 +1,74 @@
+.nutrition-facts-table {
+  line-height: 1.7;
+  color: #444445;
+  text-align: left;
+  font-size: 15px;
+  box-sizing: border-box;
+  border: 1px solid #000;
+  padding: 2px 1%;
+  font-family: Arial, Helvetica, sans-serif;
+  width: 350px;
+  margin: 5px;
+  padding: 7px;
+
+  .facts-table-header {
+    font-size: 39px;
+    border-bottom: 3px solid #000;
+    text-align: left;
+    font-weight: 900;
+    line-height: initial;
+  }
+
+  .facts-table-serving {
+    font-size: 0.9em;
+    line-height: initial;
+    padding: 3px 0;
+  }
+
+  .calories {
+    line-height: initial;
+
+    .label {
+      font-size: 33px;
+      font-weight: 900;
+      padding: 1px;
+      margin: auto 0;
+    }
+
+    .value {
+      font-size: 42px;
+      font-weight: 900;
+    }
+  }
+
+  .chart {
+    .ant-row {
+      border-top: 1px solid black;
+      justify-content: space-between;
+    }
+
+    .thick-border-bottom {
+      border-bottom: 2px solid black;
+    }
+  }
+
+  .left-padding-1 {
+    padding-left: 10px;
+  }
+
+  .no-sugar-added {
+    margin-left: 20px;
+  }
+
+  .large-border-bottom {
+    border-bottom: 11px solid black;
+  }
+
+  .medium-border-bottom {
+    border-bottom: 5px solid black;
+  }
+
+  .facts-table-footer {
+    font-size: 12px;
+  }
+}

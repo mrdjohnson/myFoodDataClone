@@ -2,6 +2,7 @@ import React from "react";
 import logo from "./logo.svg";
 
 import Sidebar from "./Sidebar/Sidebar";
+import NutritionFactsTable from "./NutritionFacts/NutritionFactsTable";
 
 import { Layout } from "antd";
 import "./App.scss";
@@ -32,7 +33,7 @@ function App() {
           <Sidebar />
         </Sider>
 
-        <Content></Content>
+        <Content><NutritionFactsTable /></Content>
       </Layout>
 
       <Footer className="app-footer">
