@@ -1,0 +1,68 @@
+.histograms {
+  font-family: sans-serif;
+  line-height: 1.7;
+  color: #444445;
+  font-size: 16px;
+  box-sizing: border-box;
+  text-align: center;
+  width: 230px;
+  margin: 0 15px 20px 15px;
+
+  .ant-col {
+    flex: 1;
+  }
+}
+
+.data-title {
+  font-size: 18px;
+  margin: 15px 3px 3px 3px;
+}
+
+.data-tile {
+  border: 2px solid #777;
+  background-color: #f0f1f0;
+  border-radius: 5px;
+}
+
+.water {
+  background-color: #3baae1;
+}
+
+.fat {
+  background-color: #ffc856;
+}
+
+.carbs {
+  background-color: #ef445a;
+}
+
+.protein {
+  background-color: #026380;
+}
+
+.alcohol {
+  background-color: #46b996;
+}
+
+.legend {
+  .ant-col {
+    border-top: 2px solid #444445;
+    padding: 10px 0 10px 0;
+    line-height: initial;
+    border-right: 2px solid #777;
+
+    :first-child {
+      font-size: 20px;
+      font-weight: 900;
+    }
+
+    :last-child {
+      font-size: 13px;
+      color: #777;
+    }
+  }
+
+  :last-child {
+    border-right: none;
+  }
+}

@@ -2,6 +2,7 @@ import React from "react";
 
 import Sidebar from "./Sidebar/Sidebar";
 import NutritionFactsTable from "./NutritionFacts/NutritionFactsTable";
+import NutritionFactsHistogram from "./NutritionFacts/NutritionFactsHistogram";
 
 import { Layout } from "antd";
 import "./App.scss";
@@ -27,12 +28,16 @@ function App() {
   return (
     <Layout style={{ minHeight: "100vh" }}>
       <Header className="header">Header</Header>
+      
       <Layout>
         <Sider width={310}>
           <Sidebar />
         </Sider>
 
-        <Content><NutritionFactsTable /></Content>
+        <Content>
+          <NutritionFactsTable />
+          <NutritionFactsHistogram />
+        </Content>
       </Layout>
 
       <Footer className="app-footer">

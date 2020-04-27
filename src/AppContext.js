@@ -1,7 +1,7 @@
 import React, { createContext, useState, useEffect } from "react";
 import Axios from "axios";
 
-import appleExample from "./fixtures/apple.json";
+import hamburgerExample from "./fixtures/hamburger.json";
 import formatFoodItemData, {
   calculateNutritionalFactTable,
 } from "./util/format_food_item_data";
@@ -15,7 +15,7 @@ export const AppProvider = ({ children }) => {
   const [foodItemData, setFoodItemData] = useState();
 
   useEffect(() => {
-    formatAndUpdateFoodItemData(appleExample);
+    formatAndUpdateFoodItemData(hamburgerExample);
   }, []);
 
   function formatAndUpdateFoodItemData(fooItemData) {
