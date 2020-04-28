@@ -24,6 +24,26 @@
   border-radius: 5px;
 }
 
+.square {
+  height: 368px;
+  
+  .ant-col {
+    font-family: sans-serif;
+    line-height: 1.7;
+    font-size: 16px;
+    text-align: center;
+    box-sizing: border-box;
+    display: block;
+    color: #444445;
+    -webkit-animation-name: pullUp;
+    -webkit-animation-duration: 1.1s;
+    -webkit-animation-timing-function: ease-out;
+    -webkit-transform-origin: 50% 100%;
+    transition: 1s;
+    overflow: hidden;
+  }
+}
+
 .water {
   background-color: #3baae1;
 }
@@ -65,5 +85,22 @@
 
   :last-child {
     border-right: none;
+  }
+}
+
+@keyframes pullUp {
+  0% {
+    transform: scaleY(0.1);
+  }
+  100% {
+    transform: scaleY(1);
+  }
+}
+@-webkit-keyframes pullUp {
+  0% {
+    -webkit-transform: scaleY(0.1);
+  }
+  100% {
+    -webkit-transform: scaleY(1.02);
   }
 }
