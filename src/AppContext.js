@@ -24,7 +24,8 @@ export const AppProvider = ({ children }) => {
 
   function fetchFoodItemData(foodItemName) {
     Axios.get(
-      `https://tools.myfooddata.com/ajax/data-update-nf.php?name=${foodItemName}`
+      `https://tools.myfooddata.com/ajax/data-update-nf.php?name=${foodItemName}`,
+      { headers: { "Access-Control-Allow-Origin": "*" } }
     ).then(({ data }) => {
       formatAndUpdateFoodItemData(data);
     });

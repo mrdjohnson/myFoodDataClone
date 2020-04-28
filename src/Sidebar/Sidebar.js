@@ -26,7 +26,8 @@ function Sidebar() {
     }
 
     Axios.get(
-      `https://tools.myfooddata.com/ajax/name-suggest.php?q=${foodSearchString}`
+      `https://tools.myfooddata.com/ajax/name-suggest.php?q=${foodSearchString}`,
+      { headers: { "Access-Control-Allow-Origin": "*" } }
     ).then(({ data }) => {
       const foodResponseItems = data.trim().split(",");
 
