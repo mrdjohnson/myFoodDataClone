@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "902d87838118bfc1a7cf0d9c199741b2",
+    "revision": "ecc8cea077e9b2a5c27995aa06e01048",
     "url": "/myFoodDataClone/index.html"
   },
   {
@@ -8,16 +8,16 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/myFoodDataClone/static/css/2.a72c35d3.chunk.css"
   },
   {
-    "revision": "671b3b35f0d054fe52da",
-    "url": "/myFoodDataClone/static/css/main.f95bf11d.chunk.css"
+    "revision": "14419054df9e675a2b17",
+    "url": "/myFoodDataClone/static/css/main.d5268e15.chunk.css"
   },
   {
     "revision": "9cdb30ef1326159acd83",
     "url": "/myFoodDataClone/static/js/2.6642d33d.chunk.js"
   },
   {
-    "revision": "671b3b35f0d054fe52da",
-    "url": "/myFoodDataClone/static/js/main.de44b3d0.chunk.js"
+    "revision": "14419054df9e675a2b17",
+    "url": "/myFoodDataClone/static/js/main.b2ed629c.chunk.js"
   },
   {
     "revision": "3e98a868fbcd7dd3579b",
