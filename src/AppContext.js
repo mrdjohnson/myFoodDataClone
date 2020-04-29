@@ -13,6 +13,8 @@ const { Provider } = AppContext;
 // This context provider is passed to any component requiring the context
 export const AppProvider = ({ children }) => {
   const [foodItemData, setFoodItemData] = useState();
+  const [isMobile, setIsMobile] = useState(false);
+  const [displayDrawer, setDisplayDrawer] = useState(false);
 
   useEffect(() => {
     formatAndUpdateFoodItemData(hamburgerExample);
@@ -23,6 +25,8 @@ export const AppProvider = ({ children }) => {
   }
 
   function fetchFoodItemData(foodItemName) {
+    setDisplayDrawer(false);
+
     Axios.get(
       `https://us-central1-fasttripfinder-199123.cloudfunctions.net/my-food-data-proxy/?query=data-update-nf.php?name=${foodItemName}`
     ).then(({ data }) => {
@@ -46,6 +50,10 @@ export const AppProvider = ({ children }) => {
     });
   }
 
+  function toggleMobile() {
+    setIsMobile(!isMobile);
+  }
+
   const clearFoodItemData = () => setFoodItemData(null);
 
   return (
@@ -55,6 +63,12 @@ export const AppProvider = ({ children }) => {
         fetchFoodItemData,
         clearFoodItemData,
         updateFoodItemDataNutritionFactTable,
+
+        isMobile,
+        toggleMobile,
+
+        displayDrawer,
+        setDisplayDrawer,
       }}
     >
       {children}

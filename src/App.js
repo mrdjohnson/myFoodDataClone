@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 
 import Sidebar from "./Sidebar/Sidebar";
 import NutritionFactsPanel from "./NutritionFacts/NutritionFactsPanel";
@@ -7,10 +7,13 @@ import logo from "./assets/logo.svg";
 
 import { Layout } from "antd";
 import "./App.scss";
+import AppContext from "./AppContext";
 
 const { Header, Content, Footer, Sider } = Layout;
 
 function App() {
+  const { toggleMobile } = useContext(AppContext);
+
   const AppFooter = () => (
     <>
       <div className="app-footer-links">
@@ -40,7 +43,13 @@ function App() {
       </Header>
 
       <Layout>
-        <Sider width={310}>
+        <Sider
+          width={310}
+          breakpoint="md"
+          collapsedWidth={0}
+          trigger={null}
+          onCollapse={toggleMobile}
+        >
           <Sidebar />
         </Sider>
 
