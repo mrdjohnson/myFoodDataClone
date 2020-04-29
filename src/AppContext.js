@@ -24,8 +24,7 @@ export const AppProvider = ({ children }) => {
 
   function fetchFoodItemData(foodItemName) {
     Axios.get(
-      `https://tools.myfooddata.com/ajax/data-update-nf.php?name=${foodItemName}`,
-      { headers: { "Access-Control-Allow-Origin": "*" } }
+      `https://us-central1-fasttripfinder-199123.cloudfunctions.net/my-food-data-proxy/?query=data-update-nf.php?name=${foodItemName}`
     ).then(({ data }) => {
       formatAndUpdateFoodItemData(data);
     });

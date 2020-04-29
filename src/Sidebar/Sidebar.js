@@ -26,8 +26,7 @@ function Sidebar() {
     }
 
     Axios.get(
-      `https://tools.myfooddata.com/ajax/name-suggest.php?q=${foodSearchString}`,
-      { headers: { "Access-Control-Allow-Origin": "*" } }
+      `https://us-central1-fasttripfinder-199123.cloudfunctions.net/my-food-data-proxy/?query=name-suggest.php?q=${foodSearchString}`
     ).then(({ data }) => {
       const foodResponseItems = data.trim().split(",");
 
