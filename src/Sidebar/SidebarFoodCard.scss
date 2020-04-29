@@ -30,3 +30,14 @@
     padding: 0;
   }
 }
+
+.sidebar-food-card__select {
+  .ant-select-selector {
+    height: fit-content !important;
+  }
+
+  .ant-select-selection-item {
+    white-space: normal;
+    line-height: 22px !important;
+  }
+}

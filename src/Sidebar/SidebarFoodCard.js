@@ -85,6 +85,7 @@ function SidebarFoodCard({ foodItemData }) {
         <Col span={20}>
           <Select
             value={selectedWeight}
+            className="sidebar-food-card__select"
             style={{ width: "100%" }}
             dropdownMatchSelectWidth={false}
             onChange={updateSelectedWeight}
