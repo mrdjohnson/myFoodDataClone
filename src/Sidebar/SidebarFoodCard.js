@@ -64,7 +64,7 @@ function SidebarFoodCard({ foodItemData }) {
       className="sidebar-food-card"
     >
       <Row className="sidebar-food-card__body" align="middle">
-        <Col span={2}>
+        <Col span={4}>
           <InputNumber
             min={MIN_QUANTITY}
             max={MAX_QUANTITY}
@@ -79,7 +79,7 @@ function SidebarFoodCard({ foodItemData }) {
           <CloseOutlined />
         </Col>
 
-        <Col span={20}>
+        <Col span={18}>
           <Select
             value={selectedWeight}
             className="sidebar-food-card__select"
