@@ -1,8 +1,14 @@
+@import "../util/responsive_css.scss";
+
 .facts-panel {
   font-family: sans-serif;
   max-width: 650px;
   text-align: center;
   font-size: 16px;
+
+  @include mobile {
+    max-width: 100%;
+  }
 }
 
 .facts-panel-header {
@@ -26,6 +32,11 @@
 .facts-panel-body {
   padding-top: 20px;
   justify-content: center;
+
+  @include mobile {
+    max-width: 500px;
+    margin: 0 auto;
+  }
 }
 
 .ant-drawer-content-wrapper {
@@ -33,7 +44,7 @@
 }
 
 .facts-panel__button {
-    width: 100%;
-    background-color: #444445;
-    color: whitesmoke;
+  width: 100%;
+  background-color: #444445;
+  color: whitesmoke;
 }

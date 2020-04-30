@@ -17,12 +17,14 @@ export default function NutritionFactsPanel() {
   } = useContext(AppContext);
 
   if (!foodItemData) return null;
+
   return (
     <div className="facts-panel">
       {isMobile && (
         <>
           <Button
             className="facts-panel__button"
+            size="large"
             onClick={() => setDisplayDrawer(true)}
           >
             🔍 Find Another Food
@@ -48,10 +50,12 @@ export default function NutritionFactsPanel() {
         {foodItemData.datatype}
       </div>
 
-      <Row align="middle" className="facts-panel-body">
-        <NutritionFactsTable />
-        <NutritionFactsHistogram />
-      </Row>
+      <div>
+        <Row align="middle" className="facts-panel-body">
+          <NutritionFactsTable />
+          <NutritionFactsHistogram />
+        </Row>
+      </div>
     </div>
   );
 }
