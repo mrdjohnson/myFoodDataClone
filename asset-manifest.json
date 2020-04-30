@@ -1,25 +1,25 @@
 {
   "files": {
-    "main.css": "/myFoodDataClone/static/css/main.9dae7dd7.chunk.css",
-    "main.js": "/myFoodDataClone/static/js/main.b56c51c7.chunk.js",
-    "main.js.map": "/myFoodDataClone/static/js/main.b56c51c7.chunk.js.map",
+    "main.css": "/myFoodDataClone/static/css/main.ded1e446.chunk.css",
+    "main.js": "/myFoodDataClone/static/js/main.c838ed63.chunk.js",
+    "main.js.map": "/myFoodDataClone/static/js/main.c838ed63.chunk.js.map",
     "runtime-main.js": "/myFoodDataClone/static/js/runtime-main.e6d317ac.js",
     "runtime-main.js.map": "/myFoodDataClone/static/js/runtime-main.e6d317ac.js.map",
     "static/css/2.a72c35d3.chunk.css": "/myFoodDataClone/static/css/2.a72c35d3.chunk.css",
     "static/js/2.a22326b7.chunk.js": "/myFoodDataClone/static/js/2.a22326b7.chunk.js",
     "static/js/2.a22326b7.chunk.js.map": "/myFoodDataClone/static/js/2.a22326b7.chunk.js.map",
     "index.html": "/myFoodDataClone/index.html",
-    "precache-manifest.54e9c81f769c25775c22fa20fe6bc076.js": "/myFoodDataClone/precache-manifest.54e9c81f769c25775c22fa20fe6bc076.js",
+    "precache-manifest.f1381f82875874b5dad3e5a06c6dee2b.js": "/myFoodDataClone/precache-manifest.f1381f82875874b5dad3e5a06c6dee2b.js",
     "service-worker.js": "/myFoodDataClone/service-worker.js",
     "static/css/2.a72c35d3.chunk.css.map": "/myFoodDataClone/static/css/2.a72c35d3.chunk.css.map",
-    "static/css/main.9dae7dd7.chunk.css.map": "/myFoodDataClone/static/css/main.9dae7dd7.chunk.css.map",
+    "static/css/main.ded1e446.chunk.css.map": "/myFoodDataClone/static/css/main.ded1e446.chunk.css.map",
     "static/media/logo.svg": "/myFoodDataClone/static/media/logo.8357fd40.svg"
   },
   "entrypoints": [
     "static/js/runtime-main.e6d317ac.js",
     "static/css/2.a72c35d3.chunk.css",
     "static/js/2.a22326b7.chunk.js",
-    "static/css/main.9dae7dd7.chunk.css",
-    "static/js/main.b56c51c7.chunk.js"
+    "static/css/main.ded1e446.chunk.css",
+    "static/js/main.c838ed63.chunk.js"
   ]
 }
