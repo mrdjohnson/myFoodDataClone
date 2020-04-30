@@ -69,6 +69,7 @@ function SidebarFoodCard({ foodItemData }) {
             min={MIN_QUANTITY}
             max={MAX_QUANTITY}
             value={selectedQuantity}
+            placeholder={1}
             onChange={updateSelectedQuantity}
             className="sidebar-food-card__serving-input"
           />
