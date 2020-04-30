@@ -46,7 +46,7 @@ export default function NutritionFactsPanel() {
       <div className="facts-panel-subheader">{foodItemData.longname}</div>
 
       <div>
-        <strong>Database:</strong>
+        <strong>Database:  </strong>
         {foodItemData.datatype}
       </div>
 
