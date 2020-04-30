@@ -1,15 +1,7 @@
 import _ from "lodash";
 
-function formatFoodItemData(
-  foodItemData,
-  selectedQuantity = 1,
-  selectedWeightIndex = 0
-) {
-  const nutritionFactTable = calculateNutritionalFactTable(
-    foodItemData,
-    selectedQuantity,
-    selectedWeightIndex
-  );
+function formatFoodItemData(foodItemData) {
+  const nutritionFactTable = calculateNutritionalFactTable(foodItemData);
 
   return {
     ...foodItemData,
@@ -19,16 +11,8 @@ function formatFoodItemData(
   };
 }
 
-export function calculateNutritionalFactTable(
-  foodItemData,
-  selectedQuantity,
-  selectedWeightIndex
-) {
-  const nutritionFactsByKey = nutritionFactsFromFoodData(
-    foodItemData,
-    selectedQuantity,
-    selectedWeightIndex
-  );
+function calculateNutritionalFactTable(foodItemData) {
+  const nutritionFactsByKey = nutritionFactsFromFoodData(foodItemData);
 
   return {
     calories: nutritionFactsByKey("ENERC_KCAL", 2000),
@@ -53,11 +37,8 @@ export function calculateNutritionalFactTable(
 
 const missingData = { value: "~", percentage: "~" };
 
-function nutritionFactsFromFoodData(
-  foodItemData,
-  selectedQuantity,
-  selectedWeightIndex
-) {
+function nutritionFactsFromFoodData(foodItemData) {
+  const { selectedQuantity, selectedWeightIndex } = foodItemData;
   const ratio = _.toNumber(foodItemData.wt_arr[selectedWeightIndex]) / 100;
 
   return (key, divsor = 1) => {

@@ -16,21 +16,18 @@ const MAX_QUANTITY = 10000;
 function SidebarFoodCard({ foodItemData }) {
   const {
     clearFoodItemData,
-    updateFoodItemDataNutritionFactTable,
+    updateFoodWithSelectedQuantity,
+    updateFoodWithSelectedWeight,
   } = useContext(AppContext);
 
+  const { selectedQuantity, selectedWeightIndex } = foodItemData;
   const servingDescriptions = foodItemData["desc_arr"];
   const servingWeights = foodItemData["wt_arr"].map(_.toInteger);
   const servings = _.zip(servingDescriptions, servingWeights).map(
     ([description, weight]) => `${description} (${weight}g)`
   );
 
-  const [selectedWeightIndex, setSelectedWeightIndex] = useState(0);
   const selectedWeight = servings[selectedWeightIndex];
-
-  useEffect(() => {
-    setSelectedWeightIndex(0);
-  }, [foodItemData.id]);
 
   const closeButton = (
     <Tooltip title="close">
@@ -49,15 +46,14 @@ function SidebarFoodCard({ foodItemData }) {
     </Option>
   );
 
-  const updateQuantity = (selectedQuantity) => {
-    if (MIN_QUANTITY < selectedQuantity && selectedQuantity < MAX_QUANTITY) {
-      updateFoodItemDataNutritionFactTable({ selectedQuantity });
+  const updateSelectedQuantity = (selectedQuantity) => {
+    if (MIN_QUANTITY <= selectedQuantity && selectedQuantity < MAX_QUANTITY) {
+      updateFoodWithSelectedQuantity(foodItemData, selectedQuantity);
     }
   };
 
-  const updateSelectedWeight = (selectedWeightIndex) => {
-    updateFoodItemDataNutritionFactTable({ selectedWeightIndex });
-    setSelectedWeightIndex(selectedWeightIndex);
+  const updateSelectedWeightIndex = (selectedWeightIndex) => {
+    updateFoodWithSelectedWeight(foodItemData, selectedWeightIndex);
   };
 
   return (
@@ -72,8 +68,8 @@ function SidebarFoodCard({ foodItemData }) {
           <InputNumber
             min={MIN_QUANTITY}
             max={MAX_QUANTITY}
-            defaultValue={1}
-            onChange={updateQuantity}
+            value={selectedQuantity}
+            onChange={updateSelectedQuantity}
             className="sidebar-food-card__serving-input"
           />
         </Col>
@@ -88,7 +84,7 @@ function SidebarFoodCard({ foodItemData }) {
             className="sidebar-food-card__select"
             style={{ width: "100%" }}
             dropdownMatchSelectWidth={false}
-            onChange={updateSelectedWeight}
+            onChange={updateSelectedWeightIndex}
           >
             {servings.map(renderServing)}
           </Select>
