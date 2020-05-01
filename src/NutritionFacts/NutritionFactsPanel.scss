@@ -37,6 +37,14 @@
     max-width: 500px;
     margin: 0 auto;
   }
+
+  &.serving-selector {
+    justify-content: left;
+  }
+
+  .serving-selector__selection-row {
+    padding-top: 5px;
+  }
 }
 
 .ant-drawer-content-wrapper {
