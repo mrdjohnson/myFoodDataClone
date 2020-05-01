@@ -12,32 +12,3 @@
     color: #99a4a5;
   }
 }
-
-.sidebar-food-card__body {
-  * {
-    text-align: center;
-  }
-}
-
-.sidebar-food-card__serving-input {
-  width: 100%;
-
-  .ant-input-number-handler-wrap {
-    display: none;
-  }
-
-  .ant-input-number-input {
-    padding: 0;
-  }
-}
-
-.sidebar-food-card__select {
-  .ant-select-selector {
-    height: fit-content !important;
-  }
-
-  .ant-select-selection-item {
-    white-space: normal;
-    line-height: 22px !important;
-  }
-}

@@ -1,0 +1,44 @@
+.serving-size-selection-row {
+  width: 100%;
+  height: fit-content;
+
+  .ant-card-body {
+    padding: 10px 5px;
+  }
+}
+
+.serving-size-selection-row__close-button {
+  * {
+    color: #99a4a5;
+  }
+}
+
+.serving-size-selection-row__body {
+  * {
+    text-align: center;
+  }
+}
+
+.serving-size-selection-row__serving-input {
+  width: 100%;
+
+  .ant-input-number-handler-wrap {
+    display: none;
+  }
+
+  .ant-input-number-input {
+    padding: 0;
+  }
+}
+
+.serving-size-selection-row__select {
+  .ant-select-selector {
+    height: fit-content !important;
+    min-height: 30px;
+  }
+
+  .ant-select-selection-item {
+    white-space: normal;
+    line-height: 22px !important;
+  }
+}
