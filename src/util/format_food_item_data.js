@@ -41,14 +41,14 @@ function nutritionFactsFromFoodData(foodItemData) {
   const { selectedQuantity, selectedWeightIndex } = foodItemData;
   const ratio = _.toNumber(foodItemData.wt_arr[selectedWeightIndex]) / 100;
 
-  return (key, divsor = 1) => {
+  return (key, dailyValue = 1) => {
     if (!foodItemData[key][0]) return missingData;
 
     const base = _.toNumber(foodItemData[key]) * ratio * selectedQuantity;
 
     return {
       value: Math.round((base * 10) / 10),
-      percentage: Math.round((base / (1.0 * divsor)) * 100),
+      percentage: Math.round((base / (1.0 * dailyValue)) * 100),
     };
   };
 }
