@@ -12,7 +12,8 @@ import AppContext from "./AppContext";
 const { Header, Content, Footer, Sider } = Layout;
 
 function App() {
-  const { toggleMobile } = useContext(AppContext);
+  const { foodItemData, toggleMobile } = useContext(AppContext);
+  const displaySider = foodItemData !== null;
 
   const AppFooter = () => (
     <>
@@ -43,15 +44,17 @@ function App() {
       </Header>
 
       <Layout>
-        <Sider
-          width={310}
-          breakpoint="md"
-          collapsedWidth={0}
-          trigger={null}
-          onCollapse={toggleMobile}
-        >
-          <Sidebar />
-        </Sider>
+        {displaySider && (
+          <Sider
+            width={310}
+            breakpoint="md"
+            collapsedWidth={0}
+            trigger={null}
+            onCollapse={toggleMobile}
+          >
+            <Sidebar />
+          </Sider>
+        )}
 
         <Content>
           <NutritionFactsPanel />

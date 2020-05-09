@@ -1,0 +1,26 @@
+.home-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .ant-select-selector {
+    border: 1px solid #3baae1 !important;
+    background: #f0f1f0 !important;
+    width: 500px !important;
+  }
+}
+
+.home-header {
+  box-sizing: border-box;
+  color: #333;
+  font-weight: 700;
+  font-size: 30px;
+  margin: 18px 0 8px 0;
+  line-height: initial;
+}
+
+.home-info-how-to-search-line {
+  font-weight: 500;
+  font-size: 15px;
+  margin-bottom: 2px;
+}

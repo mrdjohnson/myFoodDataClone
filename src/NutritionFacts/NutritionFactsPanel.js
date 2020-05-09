@@ -5,6 +5,8 @@ import { Row, Drawer, Button } from "antd";
 import NutritionFactsHistogram from "./NutritionFactsHistogram";
 import AppContext from "../AppContext";
 
+import HomePage from "../HomePage";
+
 import "./NutritionFactsPanel.scss";
 import Sidebar from "../Sidebar/Sidebar";
 import ServingSizeSelectionRow from "../Sidebar/ServingSizeSelectionRow";
@@ -17,7 +19,7 @@ export default function NutritionFactsPanel() {
     setDisplayDrawer,
   } = useContext(AppContext);
 
-  if (!foodItemData) return null;
+  if (!foodItemData) return <HomePage />;
 
   const MobileHeader = () =>
     isMobile && (
@@ -52,7 +54,10 @@ export default function NutritionFactsPanel() {
           Serving Size:
         </Row>
 
-        <ServingSizeSelectionRow className="serving-selector__selection-row" foodItemData={foodItemData} />
+        <ServingSizeSelectionRow
+          className="serving-selector__selection-row"
+          foodItemData={foodItemData}
+        />
       </div>
     );
 
