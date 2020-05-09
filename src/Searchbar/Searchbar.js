@@ -10,13 +10,13 @@ import "./Searchbar.scss";
 
 const { Option } = Select;
 
-function Searchbar() {
+function Searchbar({ placeholder = "🔍 Find Another Food" }) {
   const [searchValue, setSearchValue] = useState();
   const [foodItems, setFoodItems] = useState([]);
 
   const { fetchFoodItemData } = useContext(AppContext);
 
-  const searchFoodItems = _.debounce(foodSearchString => {
+  const searchFoodItems = _.debounce((foodSearchString) => {
     setFoodItems([]);
 
     if (_.isEmpty(foodSearchString)) {
@@ -34,7 +34,7 @@ function Searchbar() {
     });
   }, 300);
 
-  const updateSearchedValue = searchedFoodItem => {
+  const updateSearchedValue = (searchedFoodItem) => {
     console.log("selected: ", searchedFoodItem);
 
     if (_.isEmpty(searchedFoodItem)) {
@@ -45,7 +45,7 @@ function Searchbar() {
     }
   };
 
-  const renderHighlightedFoodItem = foodItem => {
+  const renderHighlightedFoodItem = (foodItem) => {
     return (
       <Option key={foodItem}>
         {foodItemWithHighlights(foodItem, searchValue)}
@@ -59,7 +59,7 @@ function Searchbar() {
       showSearch
       showArrow={false}
       value={searchValue}
-      placeholder="🔍 Find Another Food"
+      placeholder={placeholder}
       notFoundContent={false}
       filterOption={false}
       onSearch={searchFoodItems}
