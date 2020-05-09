@@ -1,8 +1,8 @@
-import React, { createContext, useState, useEffect, useCallback } from "react";
+import React, { createContext, useState, useEffect } from "react";
 import Axios from "axios";
 import { useHistory } from "react-router-dom";
 
-import sugarAppleExample from './fixtures/sugar_apple.json'
+import sugarAppleExample from "./fixtures/sugar_apple.json";
 import formatFoodItemData, {
   formatFoodItemDataFromQueryParams,
 } from "./util/format_food_item_data";
@@ -21,19 +21,6 @@ export const AppProvider = ({ children }) => {
   const [isMobile, setIsMobile] = useState(false);
   const [displayDrawer, setDisplayDrawer] = useState(false);
 
-  const fetchFoodItemData = useCallback(
-    (foodItemName, formatResponse = foodItemDataWithDefaultSelected) => {
-      setDisplayDrawer(false);
-
-      Axios.get(
-        `https://us-central1-fasttripfinder-199123.cloudfunctions.net/my-food-data-proxy/?query=data-update-nf.php?name=${foodItemName}`
-      ).then(({ data }) => {
-        formatAndUpdateFoodItemData(formatResponse(data));
-      });
-    },
-    []
-  );
-
   useEffect(() => {
     formatAndUpdateFoodItemData(
       foodItemDataWithDefaultSelected(sugarAppleExample)
@@ -44,6 +31,19 @@ export const AppProvider = ({ children }) => {
   useEffect(() => {
     updateFoodItemDataFromQueryParams();
   }, []);
+
+  function fetchFoodItemData(
+    foodItemName,
+    formatResponse = foodItemDataWithDefaultSelected
+  ) {
+    setDisplayDrawer(false);
+
+    Axios.get(
+      `https://us-central1-fasttripfinder-199123.cloudfunctions.net/my-food-data-proxy/?query=data-update-nf.php?name=${foodItemName}`
+    ).then(({ data }) => {
+      formatAndUpdateFoodItemData(formatResponse(data));
+    });
+  }
 
   function updateFoodItemDataFromQueryParams() {
     return getQueryParamsFromHistory(history).then(
