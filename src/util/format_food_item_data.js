@@ -1,5 +1,8 @@
 import _ from "lodash";
 
+const MIN_QUANTITY = 1;
+const MAX_QUANTITY = 10000;
+
 function formatFoodItemData(foodItemData) {
   const nutritionFactTable = calculateNutritionalFactTable(foodItemData);
 
@@ -54,3 +57,35 @@ function nutritionFactsFromFoodData(foodItemData) {
 }
 
 export default formatFoodItemData;
+
+function validQuantity(quantity) {
+  if (quantity >= MIN_QUANTITY && quantity <= MAX_QUANTITY) {
+    return quantity;
+  }
+
+  return MIN_QUANTITY;
+}
+
+function weightIndexFromServingWeight(foodItemData, servingWeight) {
+  const weightIndex = _.indexOf(foodItemData.code_arr, servingWeight);
+
+  if (weightIndex < 0) {
+    return 0;
+  }
+
+  return weightIndex;
+}
+
+export function formatFoodItemDataFromQueryParams(
+  itemData,
+  servingWeight,
+  quantity
+) {
+  const selectedQuantity = validQuantity(quantity);
+  const selectedWeightIndex = weightIndexFromServingWeight(
+    itemData,
+    servingWeight
+  );
+
+  return { ...itemData, selectedQuantity, selectedWeightIndex };
+}
