@@ -1,19 +1,19 @@
 import React, { useContext } from "react";
+import { Layout } from "antd";
 
 import Sidebar from "./Sidebar/Sidebar";
 import NutritionFactsPanel from "./NutritionFacts/NutritionFactsPanel";
+import AppContext from "./AppContext";
 
 import logo from "./assets/logo.svg";
 
-import { Layout } from "antd";
 import "./App.scss";
-import AppContext from "./AppContext";
 
 const { Header, Content, Footer, Sider } = Layout;
 
 function App() {
-  const { foodItemData, toggleMobile } = useContext(AppContext);
-  const displaySider = foodItemData !== null;
+  const { foodItemData, isMobile } = useContext(AppContext);
+  const displaySider = isMobile ? false : foodItemData;
 
   const AppFooter = () => (
     <>
@@ -45,13 +45,7 @@ function App() {
 
       <Layout>
         {displaySider && (
-          <Sider
-            width={310}
-            breakpoint="md"
-            collapsedWidth={0}
-            trigger={null}
-            onCollapse={toggleMobile}
-          >
+          <Sider width={310} trigger={null}>
             <Sidebar />
           </Sider>
         )}
