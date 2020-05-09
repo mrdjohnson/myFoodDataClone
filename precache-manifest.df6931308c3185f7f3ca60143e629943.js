@@ -1,27 +1,27 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "d02b3cbb0fdfb464df4bfc05ecbafb59",
+    "revision": "5cc9b0a7f600ec105419c3af99d05410",
     "url": "/myFoodDataClone/index.html"
   },
   {
-    "revision": "3185e561596cad80658e",
+    "revision": "333343d28b3565f8e16c",
     "url": "/myFoodDataClone/static/css/2.a72c35d3.chunk.css"
   },
   {
-    "revision": "c1eee56f35568988616a",
+    "revision": "be75ea3ab3b32236287b",
     "url": "/myFoodDataClone/static/css/main.c2dfc17e.chunk.css"
   },
   {
-    "revision": "3185e561596cad80658e",
-    "url": "/myFoodDataClone/static/js/2.916fbaf9.chunk.js"
+    "revision": "333343d28b3565f8e16c",
+    "url": "/myFoodDataClone/static/js/2.0560e4b7.chunk.js"
   },
   {
     "revision": "61366feb7db0fb496cbd",
     "url": "/myFoodDataClone/static/js/3.2a759879.chunk.js"
   },
   {
-    "revision": "c1eee56f35568988616a",
-    "url": "/myFoodDataClone/static/js/main.217f64a8.chunk.js"
+    "revision": "be75ea3ab3b32236287b",
+    "url": "/myFoodDataClone/static/js/main.4006716f.chunk.js"
   },
   {
     "revision": "8f00d8c88b1828f8572a",
