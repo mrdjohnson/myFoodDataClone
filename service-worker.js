@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/myFoodDataClone/precache-manifest.c35df8504663d06b8ffe9f575716fdeb.js"
+  "/myFoodDataClone/precache-manifest.2de8c1dbf9cf6a6aa213831636bf5587.js"
 );
 
 self.addEventListener('message', (event) => {
