@@ -13,7 +13,7 @@ const { Option } = Select;
 const MIN_QUANTITY = 1;
 const MAX_QUANTITY = 10000;
 
-function ServingSizeSelectionRow({ foodItemData, className }) {
+function ServingSizeSelectionRow({ foodItemData }) {
   const {
     updateFoodWithSelectedQuantity,
     updateFoodWithSelectedWeight,
@@ -45,36 +45,34 @@ function ServingSizeSelectionRow({ foodItemData, className }) {
   };
 
   return (
-    <div className={className}>
-      <Row className="serving-size-selection-row__body" align="middle">
-        <Col span={4}>
-          <InputNumber
-            min={MIN_QUANTITY}
-            max={MAX_QUANTITY}
-            value={selectedQuantity}
-            placeholder={1}
-            onChange={updateSelectedQuantity}
-            className="serving-size-selection-row__serving-input"
-          />
-        </Col>
+    <Row className="serving-size-selection-row__body" align="middle">
+      <Col span={4}>
+        <InputNumber
+          min={MIN_QUANTITY}
+          max={MAX_QUANTITY}
+          value={selectedQuantity}
+          placeholder={1}
+          onChange={updateSelectedQuantity}
+          className="serving-size-selection-row__serving-input"
+        />
+      </Col>
 
-        <Col span={2}>
-          <CloseOutlined />
-        </Col>
+      <Col span={2}>
+        <CloseOutlined />
+      </Col>
 
-        <Col span={18}>
-          <Select
-            value={selectedWeight}
-            className="serving-size-selection-row__select"
-            style={{ width: "100%" }}
-            dropdownMatchSelectWidth={false}
-            onChange={updateSelectedWeightIndex}
-          >
-            {servings.map(renderServing)}
-          </Select>
-        </Col>
-      </Row>
-    </div>
+      <Col span={18}>
+        <Select
+          value={selectedWeight}
+          className="serving-size-selection-row__select"
+          style={{ width: "100%" }}
+          dropdownMatchSelectWidth={false}
+          onChange={updateSelectedWeightIndex}
+        >
+          {servings.map(renderServing)}
+        </Select>
+      </Col>
+    </Row>
   );
 }
 
