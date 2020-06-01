@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 
+import _ from 'lodash';
+
 const MOBILE_BREAKPOINT = 768;
 
 export default function useIsMobile() {
@@ -11,6 +13,7 @@ export default function useIsMobile() {
   useEffect(() => {
     function isMobileListener() {
       const nextIsMobile = window.innerWidth <= MOBILE_BREAKPOINT;
+      
       if (nextIsMobile !== isMobile) {
         setIsMobile(nextIsMobile);
       }
@@ -19,7 +22,7 @@ export default function useIsMobile() {
     window.addEventListener("resize", isMobileListener);
 
     return () => window.removeEventListener("resize", isMobileListener);
-  }, []);
+  }, [isMobile]);
 
   return isMobile;
 }
