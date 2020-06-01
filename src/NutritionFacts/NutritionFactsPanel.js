@@ -54,10 +54,7 @@ export default function NutritionFactsPanel() {
           Serving Size:
         </Row>
 
-        <ServingSizeSelectionRow
-          className="serving-selector__selection-row"
-          foodItemData={foodItemData}
-        />
+        <ServingSizeSelectionRow foodItemData={foodItemData} />
       </div>
     );
 

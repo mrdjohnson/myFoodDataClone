@@ -62,7 +62,7 @@ function ServingSizeSelectionRow({ foodItemData, className }) {
           <CloseOutlined />
         </Col>
 
-        <Col flex={1}>
+        <Col span={18}>
           <Select
             value={selectedWeight}
             className="serving-size-selection-row__select"
