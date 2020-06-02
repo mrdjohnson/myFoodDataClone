@@ -1,8 +1,13 @@
 .sidebar {
-  background-color: #444445;
+  background-color: white;
   color: white;
-  padding: 15px;
+  padding-top: 45px;
   height: 100%;
+
+  .sidebar__container {
+    position: sticky;
+    top: 45px
+  }
 
   .searchbar {
     width: 100%;

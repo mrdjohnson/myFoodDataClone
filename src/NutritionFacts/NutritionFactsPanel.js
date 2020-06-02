@@ -5,21 +5,17 @@ import { Row, Drawer, Button } from "antd";
 import NutritionFactsHistogram from "./NutritionFactsHistogram";
 import AppContext from "../AppContext";
 
-import HomePage from "../HomePage";
-
 import "./NutritionFactsPanel.scss";
 import Sidebar from "../Sidebar/Sidebar";
 import ServingSizeSelectionRow from "../Sidebar/ServingSizeSelectionRow";
 
-export default function NutritionFactsPanel() {
+export default function NutritionFactsPanel({ className }) {
   const {
     foodItemData,
     isMobile,
     displayDrawer,
     setDisplayDrawer,
   } = useContext(AppContext);
-
-  if (!foodItemData) return <HomePage />;
 
   const MobileHeader = () =>
     isMobile && (
@@ -59,7 +55,7 @@ export default function NutritionFactsPanel() {
     );
 
   return (
-    <div className="facts-panel">
+    <div className={`${className} facts-panel`}>
       <MobileHeader />
 
       <h1 className="facts-panel-header">{foodItemData.name}</h1>

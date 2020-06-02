@@ -4,16 +4,18 @@ import { Layout } from "antd";
 import Sidebar from "./Sidebar/Sidebar";
 import NutritionFactsPanel from "./NutritionFacts/NutritionFactsPanel";
 import AppContext from "./AppContext";
+import HomePage from "./HomePage";
 
 import logo from "./assets/logo.svg";
 
 import "./App.scss";
 
-const { Header, Content, Footer, Sider } = Layout;
+const { Header, Content, Footer } = Layout;
 
 function App() {
   const { foodItemData, isMobile } = useContext(AppContext);
-  const displaySider = isMobile ? false : foodItemData;
+  const displayHomePage = !foodItemData;
+  const displaySider = !isMobile
 
   const AppFooter = () => (
     <>
@@ -30,8 +32,23 @@ function App() {
     </>
   );
 
+  const FoodItemDataPanel = () => (
+    <>
+      {displaySider && <Sidebar className="ant-layout-content__sidebar" />}
+
+      <NutritionFactsPanel className="ant-layout-content__nutrition-facts-panel" />
+    </>
+  );
+
+  const AppBody = () =>
+    displayHomePage ? (
+      <HomePage className="ant-layout-content__home-page" />
+    ) : (
+      <FoodItemDataPanel />
+    );
+
   return (
-    <Layout style={{ minHeight: "100vh" }}>
+    <Layout className={isMobile && "mobile"} style={{ minHeight: "100vh" }}>
       <Header className="header">
         <a href="https://www.myfooddata.com">
           <img
@@ -43,17 +60,9 @@ function App() {
         </a>
       </Header>
 
-      <Layout>
-        {displaySider && (
-          <Sider width={310} trigger={null}>
-            <Sidebar />
-          </Sider>
-        )}
-
-        <Content>
-          <NutritionFactsPanel />
-        </Content>
-      </Layout>
+      <Content>
+        <AppBody />
+      </Content>
 
       <Footer className="app-footer">
         <AppFooter />

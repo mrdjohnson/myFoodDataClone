@@ -7,13 +7,17 @@ import Searchbar from "../Searchbar/Searchbar";
 
 import "./Sidebar.scss";
 
-function Sidebar() {
+function Sidebar({ className }) {
   return (
-    <Layout className="sidebar">
-      <Searchbar />
+    <div className={className}>
+      <Layout className="sidebar">
+        <div className="sidebar__container">
+          <Searchbar />
 
-      <SidebarFoodList />
-    </Layout>
+          <SidebarFoodList />
+        </div>
+      </Layout>
+    </div>
   );
 }
 

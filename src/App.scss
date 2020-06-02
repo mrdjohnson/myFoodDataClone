@@ -51,8 +51,50 @@
   background-color: whitesmoke;
 }
 
+.ant-layout.ant-layout-has-sider > .ant-layout-content {
+  overflow-x: visible;
+}
+
 .ant-layout-content {
   background-color: white;
+  padding: 0 20px;
+
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  grid-gap: 10px;
+}
+
+.ant-layout-content__sidebar {
+  grid-column-start: 2;
+  grid-column-end: 4;
+
+  max-width: 350px;
+}
+
+.ant-layout-content__nutrition-facts-panel {
+  grid-column-start: 4;
+  grid-column-end: 8;
+}
+
+.ant-layout-content__home-page {
+  grid-column-start: 2;
+  grid-column-end: 8;
+}
+
+.mobile {
+  .ant-layout-content {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .ant-layout-content__nutrition-facts-panel {
+    grid-column-start: 1;
+    grid-column-end: 3;
+  }
+
+  .ant-layout-content__home-page {
+    grid-column-start: 1;
+    grid-column-end: 3;
+  }
 }
 
 .header-logo {
