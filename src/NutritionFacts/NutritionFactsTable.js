@@ -1,14 +1,17 @@
-import React, { useContext } from "react";
-import AppContext from "../AppContext";
+import React from "react";
+import { useRecoilValue } from "recoil";
 
 import { Row } from "antd";
+import { foodItemDataNutritionFactsState } from "../recoil/foodItemDataState";
 
 import "./NutritionFactsTable.scss";
 
 function NutritionFactsTable() {
-  const { foodItemData } = useContext(AppContext);
+  const foodItemDataNutritionFacts = useRecoilValue(
+    foodItemDataNutritionFactsState
+  );
 
-  if (!foodItemData) return null;
+  if (!foodItemDataNutritionFacts) return null;
   const {
     calories,
     totalFat,
@@ -27,7 +30,7 @@ function NutritionFactsTable() {
     calcium,
     potassium,
     phosphorus,
-  } = foodItemData.nutritionFactTable;
+  } = foodItemDataNutritionFacts;
 
   const AddedSugar = () => {
     if (addedSugar.value === "~") {

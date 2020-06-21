@@ -1,37 +1,40 @@
-import React, { createContext, useEffect } from "react";
-import { useRecoilState, useSetRecoilState, useResetRecoilState } from "recoil";
+import React, { createContext, useEffect, useCallback } from "react";
+import {
+  useRecoilState,
+  useSetRecoilState,
+  useResetRecoilState,
+  useRecoilValue,
+} from "recoil";
 import Axios from "axios";
 import { useHistory } from "react-router-dom";
 
-import formatFoodItemData, {
-  formatFoodItemDataFromQueryParams,
-} from "./util/format_food_item_data";
+import { validQuantityWeightIndexFromQueryParams } from "./util/format_food_item_data";
 import getQueryParamsFromHistory from "./util/getQueryParamsFromHistory";
 
 import { displayDrawerState } from "./recoil/displayDrawerState";
 import {
+  foodItemDataNameState,
   foodItemDataState,
   quantityWeightIndexState,
+  foodItemDataQueryStringState,
 } from "./recoil/foodItemDataState";
 
 const AppContext = createContext();
 
 const { Provider } = AppContext;
 
-const DEFAULT_SELECTED = { selectedQuantity: 1, selectedWeightIndex: 0 };
-
-const UrlUpdateStrategy = { REPLACE: "REPLACE", PUSH: "PUSH", NONE: "NONE" };
-
 export const AppProvider = ({ children }) => {
+  const foodItemDataName = useRecoilValue(foodItemDataNameState);
   const setDisplayDrawer = useSetRecoilState(displayDrawerState);
   const [foodItemData, setFoodItemData] = useRecoilState(foodItemDataState);
   const [quantityWeightIndex, setQuantityWeightIndex] = useRecoilState(
     quantityWeightIndexState
   );
-  const resetFoodItemData = useResetRecoilState(foodItemDataState);
+  const foodItemDataQueryString = useRecoilValue(foodItemDataQueryStringState);
   const resetQuantityWeightIndex = useResetRecoilState(
     quantityWeightIndexState
   );
+  const resetFoodItemData = useResetRecoilState(foodItemDataState);
   const history = useHistory();
 
   // run on mount only
@@ -49,24 +52,29 @@ export const AppProvider = ({ children }) => {
     updateFoodItemDataFromQueryParams();
   }, []);
 
-  function fetchFoodItemData(
-    foodItemName,
-    shouldResetSelected = true,
-    urlUpdateStrategy = UrlUpdateStrategy.PUSH
-  ) {
-    setDisplayDrawer(false);
+  // run when foodItemDataName changes
+  useEffect(() => {
+    fetchFoodItemData(foodItemDataName).then(resetQuantityWeightIndex);
+  }, [foodItemDataName]);
 
-    if (shouldResetSelected) {
-      resetQuantityWeightIndex();
-    }
+  // run when foodItemData changes
+  useEffect(() => {
+    updateUrlWithFood(false);
+  }, [foodItemData]);
+
+  // run when quantityWeightIndex changes
+  useEffect(() => {
+    updateUrlWithFood(true);
+  }, [quantityWeightIndex]);
+
+  function fetchFoodItemData(foodItemName) {
+    setDisplayDrawer(false);
 
     return Axios.get(
       `https://us-central1-fasttripfinder-199123.cloudfunctions.net/my-food-data-proxy/?query=data-update-nf.php?name=${foodItemName}`
     ).then(({ data }) => {
-      formatAndUpdateFoodItemData(
-        foodItemDataWithDefaultSelected(data),
-        urlUpdateStrategy
-      );
+      setFoodItemData(data);
+
       return data;
     });
   }
@@ -80,79 +88,36 @@ export const AppProvider = ({ children }) => {
         }
 
         const updateFoodItemDataWithQueryParams = (foodItemData) => {
-          const foodItemDataWithQueryParams = formatFoodItemDataFromQueryParams(
-            foodItemData,
-            servingWeight,
-            quantity
+          setQuantityWeightIndex(
+            validQuantityWeightIndexFromQueryParams(
+              foodItemData,
+              servingWeight,
+              quantity
+            )
           );
-
-          formatAndUpdateFoodItemData(foodItemDataWithQueryParams);
         };
 
-        fetchFoodItemData(foodName, false, UrlUpdateStrategy.NONE).then(
+        fetchFoodItemData(foodName, false).then(
           updateFoodItemDataWithQueryParams
         );
       }
     );
   }
 
-  function foodItemDataWithDefaultSelected(foodItemData) {
-    return { ...foodItemData, ...DEFAULT_SELECTED };
-  }
+  const updateUrlWithFood = useCallback(
+    (replaceHistory) => {
+      const queryString = foodItemDataQueryString;
 
-  function formatAndUpdateFoodItemData(
-    foodItemData,
-    urlUpdateStrategy = UrlUpdateStrategy.REPLACE
-  ) {
-    const formattedFoodData = formatFoodItemData(foodItemData);
-
-    setFoodItemData(formattedFoodData);
-    updateUrlWithFood(formattedFoodData, urlUpdateStrategy);
-  }
-
-  function updateFoodWithSelectedQuantity(foodItemData, selectedQuantity) {
-    formatAndUpdateFoodItemData({
-      ...foodItemData,
-      selectedQuantity,
-    });
-  }
-
-  function updateFoodWithSelectedWeight(foodItemData, selectedWeightIndex) {
-    formatAndUpdateFoodItemData({
-      ...foodItemData,
-      selectedWeightIndex,
-    });
-  }
-
-  function updateUrlWithFood(foodItemData, urlUpdateStrategy) {
-    const { id, selectedQuantity, selectedWeightIndex } = foodItemData;
-    const servingCode = foodItemData.code_arr[selectedWeightIndex];
-
-    const queryString = `?food=${id}&serv=${servingCode}&qty=${selectedQuantity}`;
-
-    if (urlUpdateStrategy === UrlUpdateStrategy.REPLACE) {
-      history.replace(queryString);
-    } else if (urlUpdateStrategy === UrlUpdateStrategy.PUSH) {
-      history.push(queryString);
-    }
-  }
-
-  const clearFoodItemData = () => resetFoodItemData();
-
-  return (
-    <Provider
-      value={{
-        foodItemData,
-        fetchFoodItemData,
-        clearFoodItemData,
-
-        updateFoodWithSelectedQuantity,
-        updateFoodWithSelectedWeight,
-      }}
-    >
-      {children}
-    </Provider>
+      if (replaceHistory) {
+        history.replace(queryString);
+      } else {
+        history.push(queryString);
+      }
+    },
+    [foodItemDataQueryString, history]
   );
+
+  return <Provider>{children}</Provider>;
 };
 
 export default AppContext;

@@ -1,8 +1,13 @@
-import React, { useContext } from "react";
-import AppContext from "../AppContext";
+import React from "react";
+import { useRecoilState } from "recoil";
 
 import { InputNumber, Row, Col, Select } from "antd";
 import { CloseOutlined } from "@ant-design/icons";
+
+import {
+  selectedQuantityState,
+  selectedWeightIndexState,
+} from "../recoil/foodItemDataState";
 
 import _ from "lodash";
 
@@ -14,12 +19,13 @@ const MIN_QUANTITY = 1;
 const MAX_QUANTITY = 10000;
 
 function ServingSizeSelectionRow({ foodItemData }) {
-  const {
-    updateFoodWithSelectedQuantity,
-    updateFoodWithSelectedWeight,
-  } = useContext(AppContext);
+  const [selectedQuantity, setSelectedQuantity] = useRecoilState(
+    selectedQuantityState
+  );
+  const [selectedWeightIndex, setSelectedWeightIndex] = useRecoilState(
+    selectedWeightIndexState
+  );
 
-  const { selectedQuantity, selectedWeightIndex } = foodItemData;
   const servingDescriptions = foodItemData["desc_arr"];
   const servingWeights = foodItemData["wt_arr"].map(_.toInteger);
   const servings = _.zip(servingDescriptions, servingWeights).map(
@@ -36,12 +42,9 @@ function ServingSizeSelectionRow({ foodItemData }) {
 
   const updateSelectedQuantity = (selectedQuantity) => {
     if (MIN_QUANTITY <= selectedQuantity && selectedQuantity < MAX_QUANTITY) {
-      updateFoodWithSelectedQuantity(foodItemData, selectedQuantity);
+      setSelectedQuantity(selectedQuantity);
+      console.log("updateSelectedQuantity", selectedQuantity);
     }
-  };
-
-  const updateSelectedWeightIndex = (selectedWeightIndex) => {
-    updateFoodWithSelectedWeight(foodItemData, selectedWeightIndex);
   };
 
   return (
@@ -67,7 +70,7 @@ function ServingSizeSelectionRow({ foodItemData }) {
           className="serving-size-selection-row__select"
           style={{ width: "100%" }}
           dropdownMatchSelectWidth={false}
-          onChange={updateSelectedWeightIndex}
+          onChange={setSelectedWeightIndex}
         >
           {servings.map(renderServing)}
         </Select>

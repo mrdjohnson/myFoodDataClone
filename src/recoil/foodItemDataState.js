@@ -1,40 +1,104 @@
-import { atom, selector } from "recoil";
-import formatFoodItemData, {
-  formatFoodItemDataFromQueryParams,
-  calculateNutritionalFactTable
-} from "../util/format_food_item_data";
+import { atom, selector, DefaultValue } from "recoil";
+import { calculateNutritionalFactTable } from "../util/format_food_item_data";
 
-export const foodItemDataState = atom({
-  key: "foodItemDataState",
-  default: null
+export const foodItemDataNameState = atom({
+  key: "foodItemDataNameState",
 });
 
-export const quantityWeightIndexState = atom({
-  key: "quantityWeightIndexState",
-  default: {
-    selectedQuantity: 1,
-    selectedWeightIndex: 0
-  }
-})
+const foodItemDataAtom = atom({
+  key: "foodItemDataAtom",
+  default: null,
+});
 
-const foodItemDataWithSelectedState = selector({
-  key: 'foodItemDataWithSelectedState',
-  get: ({get}) => {
-    const foodItemData = get(foodItemDataState)
-    const selectedQuantityWeightIndex = get(quantityWeightIndexState)
+export const foodItemDataState = selector({
+  key: "foodItemDataState",
+  get: ({ get }) => {
+    const foodItemData = get(foodItemDataAtom);
+
+    if (!foodItemData) return null;
 
     return {
       ...foodItemData,
-      ...selectedQuantityWeightIndex
-    }
-  }
-})
+      id: foodItemData.ndbstring,
+      name: foodItemData.names[0],
+    };
+  },
+  set: ({ set }, newValue) => set(foodItemDataAtom, newValue),
+});
 
-export const foodItemDataNutritionFacts = selector({
-  key: 'foodItemDataNutritionFactsSelector',
-  get: ({get}) => {
-    const foodItemDataWithSelected = get(foodItemDataWithSelectedState)
+export const selectedQuantityState = atom({
+  key: "selectedQuantityState",
+  default: 1,
+});
 
-    return calculateNutritionalFactTable(foodItemDataWithSelected)
-  }
-})
+export const selectedWeightIndexState = atom({
+  key: "selectedWeightIndexState",
+  default: 0,
+});
+
+export const quantityWeightIndexState = selector({
+  key: "quantityWeightIndexState",
+  get: ({ get }) => {
+    const selectedQuantity = get(selectedQuantityState);
+    const selectedWeightIndex = get(selectedWeightIndexState);
+
+    return {
+      selectedQuantity,
+      selectedWeightIndex,
+    };
+  },
+  set: ({ set }, newValue) => {
+    console.log("set->quantityWeightIndexState");
+    const defaultOrKey = (key) =>
+      newValue instanceof DefaultValue ? newValue : newValue[key];
+      
+    set(selectedQuantityState, defaultOrKey("selectedQuantity"));
+    set(selectedWeightIndexState, defaultOrKey("selectedWeightIndex"));
+  },
+});
+
+const foodItemDataWithSelectedState = selector({
+  key: "foodItemDataWithSelectedState",
+  get: ({ get }) => {
+    const foodItemData = get(foodItemDataState);
+    const quantityWeightIndex = get(quantityWeightIndexState);
+
+    if (!foodItemData) return null;
+
+    console.log(":quantityWeightIndex", quantityWeightIndex);
+
+    return {
+      ...foodItemData,
+      ...quantityWeightIndex,
+    };
+  },
+});
+
+export const foodItemDataNutritionFactsState = selector({
+  key: "foodItemDataNutritionFactsState",
+  get: ({ get }) => {
+    const foodItemDataWithSelected = get(foodItemDataWithSelectedState);
+
+    if (!foodItemDataWithSelected) return null;
+
+    return calculateNutritionalFactTable(foodItemDataWithSelected);
+  },
+});
+
+export const foodItemDataQueryStringState = selector({
+  key: "foodItemDataURLState",
+  get: ({ get }) => {
+    const foodItemData = get(foodItemDataState);
+    const quantityWeightIndex = get(quantityWeightIndexState);
+
+    if (!foodItemData) return "";
+
+    const { id } = foodItemData;
+    const { selectedQuantity, selectedWeightIndex } = quantityWeightIndex;
+    const servingCode = foodItemData.code_arr[selectedWeightIndex];
+
+    const queryString = `?food=${id}&serv=${servingCode}&qty=${selectedQuantity}`;
+
+    return queryString;
+  },
+});

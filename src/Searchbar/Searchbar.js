@@ -1,7 +1,9 @@
-import React, { useState, useContext } from "react";
-import AppContext from "../AppContext";
+import React, { useState } from "react";
+import { useSetRecoilState } from "recoil";
 
 import { Select } from "antd";
+
+import { foodItemDataNameState } from "../recoil/foodItemDataState";
 
 import Axios from "axios";
 import _ from "lodash";
@@ -14,7 +16,7 @@ function Searchbar({ placeholder = "🔍 Find Another Food" }) {
   const [searchValue, setSearchValue] = useState();
   const [foodItems, setFoodItems] = useState([]);
 
-  const { fetchFoodItemData } = useContext(AppContext);
+  const setFoodItemDataName = useSetRecoilState(foodItemDataNameState);
 
   const searchFoodItems = _.debounce((foodSearchString) => {
     setFoodItems([]);
@@ -41,7 +43,7 @@ function Searchbar({ placeholder = "🔍 Find Another Food" }) {
       setSearchValue(undefined);
     } else {
       setSearchValue(searchedFoodItem);
-      fetchFoodItemData(searchedFoodItem);
+      setFoodItemDataName(searchedFoodItem);
     }
   };
 
@@ -76,7 +78,7 @@ function foodItemWithHighlights(foodItem, substringToHighlight) {
   const saltedFoodItem = _.replace(
     foodItem,
     caseInsensitiveGlobalSearch,
-    text => `<=>${text}<=>`
+    (text) => `<=>${text}<=>`
   );
 
   const splitText = saltedFoodItem.split("<=>");

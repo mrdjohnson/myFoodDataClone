@@ -1,12 +1,13 @@
-import React, { useContext } from "react";
+import React from "react";
+import { useRecoilValue } from "recoil";
 import { Layout } from "antd";
 
 import Sidebar from "./Sidebar/Sidebar";
 import NutritionFactsPanel from "./NutritionFacts/NutritionFactsPanel";
-import AppContext from "./AppContext";
 import HomePage from "./HomePage";
 
 import useIsMobile from "./util/useIsMobile";
+import { foodItemDataState } from "./recoil/foodItemDataState";
 
 import logo from "./assets/logo.svg";
 
@@ -15,10 +16,10 @@ import "./App.scss";
 const { Header, Content, Footer } = Layout;
 
 function App() {
-  const { foodItemData } = useContext(AppContext);
+  const foodItemData = useRecoilValue(foodItemDataState);
   const isMobile = useIsMobile();
   const displayHomePage = !foodItemData;
-  const displaySider = !isMobile
+  const displaySider = !isMobile;
 
   const AppFooter = () => (
     <>

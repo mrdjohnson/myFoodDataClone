@@ -1,11 +1,13 @@
-import React, { useContext } from "react";
+import React from "react";
+import { useRecoilValue } from "recoil";
 
 import { List } from "antd";
 import SidebarFoodCard from "./SidebarFoodCard";
-import AppContext from "../AppContext";
+
+import { foodItemDataState } from "../recoil/foodItemDataState";
 
 function SideBarFoodList() {
-  const { foodItemData } = useContext(AppContext);
+  const foodItemData = useRecoilValue(foodItemDataState);
 
   if (!foodItemData) return null;
 
