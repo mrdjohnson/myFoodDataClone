@@ -14,7 +14,7 @@ function formatFoodItemData(foodItemData) {
   };
 }
 
-function calculateNutritionalFactTable(foodItemData) {
+export function calculateNutritionalFactTable(foodItemData) {
   const nutritionFactsByKey = nutritionFactsFromFoodData(foodItemData);
 
   return {

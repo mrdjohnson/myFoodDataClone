@@ -1,5 +1,5 @@
-import React, { createContext, useState, useEffect } from "react";
-import { useSetRecoilState } from "recoil";
+import React, { createContext, useEffect } from "react";
+import { useRecoilState, useSetRecoilState, useResetRecoilState } from "recoil";
 import Axios from "axios";
 import { useHistory } from "react-router-dom";
 
@@ -9,6 +9,10 @@ import formatFoodItemData, {
 import getQueryParamsFromHistory from "./util/getQueryParamsFromHistory";
 
 import { displayDrawerState } from "./recoil/displayDrawerState";
+import {
+  foodItemDataState,
+  quantityWeightIndexState,
+} from "./recoil/foodItemDataState";
 
 const AppContext = createContext();
 
@@ -19,8 +23,15 @@ const DEFAULT_SELECTED = { selectedQuantity: 1, selectedWeightIndex: 0 };
 const UrlUpdateStrategy = { REPLACE: "REPLACE", PUSH: "PUSH", NONE: "NONE" };
 
 export const AppProvider = ({ children }) => {
-  const [foodItemData, setFoodItemData] = useState();
   const setDisplayDrawer = useSetRecoilState(displayDrawerState);
+  const [foodItemData, setFoodItemData] = useRecoilState(foodItemDataState);
+  const [quantityWeightIndex, setQuantityWeightIndex] = useRecoilState(
+    quantityWeightIndexState
+  );
+  const resetFoodItemData = useResetRecoilState(foodItemDataState);
+  const resetQuantityWeightIndex = useResetRecoilState(
+    quantityWeightIndexState
+  );
   const history = useHistory();
 
   // run on mount only
@@ -40,15 +51,23 @@ export const AppProvider = ({ children }) => {
 
   function fetchFoodItemData(
     foodItemName,
-    formatResponse = foodItemDataWithDefaultSelected,
+    shouldResetSelected = true,
     urlUpdateStrategy = UrlUpdateStrategy.PUSH
   ) {
     setDisplayDrawer(false);
 
-    Axios.get(
+    if (shouldResetSelected) {
+      resetQuantityWeightIndex();
+    }
+
+    return Axios.get(
       `https://us-central1-fasttripfinder-199123.cloudfunctions.net/my-food-data-proxy/?query=data-update-nf.php?name=${foodItemName}`
     ).then(({ data }) => {
-      formatAndUpdateFoodItemData(formatResponse(data), urlUpdateStrategy);
+      formatAndUpdateFoodItemData(
+        foodItemDataWithDefaultSelected(data),
+        urlUpdateStrategy
+      );
+      return data;
     });
   }
 
@@ -56,17 +75,22 @@ export const AppProvider = ({ children }) => {
     return getQueryParamsFromHistory(history).then(
       ({ foodName, servingWeight, quantity }) => {
         if (!foodName) {
-          setFoodItemData(null);
+          resetFoodItemData();
           return;
         }
 
-        const formatFromQueryParams = (itemData) =>
-          formatFoodItemDataFromQueryParams(itemData, servingWeight, quantity);
+        const updateFoodItemDataWithQueryParams = (foodItemData) => {
+          const foodItemDataWithQueryParams = formatFoodItemDataFromQueryParams(
+            foodItemData,
+            servingWeight,
+            quantity
+          );
 
-        fetchFoodItemData(
-          foodName,
-          formatFromQueryParams,
-          UrlUpdateStrategy.NONE
+          formatAndUpdateFoodItemData(foodItemDataWithQueryParams);
+        };
+
+        fetchFoodItemData(foodName, false, UrlUpdateStrategy.NONE).then(
+          updateFoodItemDataWithQueryParams
         );
       }
     );
@@ -113,7 +137,7 @@ export const AppProvider = ({ children }) => {
     }
   }
 
-  const clearFoodItemData = () => setFoodItemData(null);
+  const clearFoodItemData = () => resetFoodItemData();
 
   return (
     <Provider
