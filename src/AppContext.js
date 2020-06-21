@@ -6,7 +6,6 @@ import formatFoodItemData, {
   formatFoodItemDataFromQueryParams,
 } from "./util/format_food_item_data";
 import getQueryParamsFromHistory from "./util/getQueryParamsFromHistory";
-import useIsMobile from "./util/useIsMobile";
 
 const AppContext = createContext();
 
@@ -18,7 +17,6 @@ const UrlUpdateStrategy = { REPLACE: "REPLACE", PUSH: "PUSH", NONE: "NONE" };
 
 export const AppProvider = ({ children }) => {
   const [foodItemData, setFoodItemData] = useState();
-  const isMobile = useIsMobile()
   const [displayDrawer, setDisplayDrawer] = useState(false);
   const history = useHistory();
 
@@ -123,8 +121,6 @@ export const AppProvider = ({ children }) => {
 
         updateFoodWithSelectedQuantity,
         updateFoodWithSelectedWeight,
-
-        isMobile,
 
         displayDrawer,
         setDisplayDrawer,

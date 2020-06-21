@@ -6,6 +6,8 @@ import NutritionFactsPanel from "./NutritionFacts/NutritionFactsPanel";
 import AppContext from "./AppContext";
 import HomePage from "./HomePage";
 
+import useIsMobile from "./util/useIsMobile";
+
 import logo from "./assets/logo.svg";
 
 import "./App.scss";
@@ -13,7 +15,8 @@ import "./App.scss";
 const { Header, Content, Footer } = Layout;
 
 function App() {
-  const { foodItemData, isMobile } = useContext(AppContext);
+  const { foodItemData } = useContext(AppContext);
+  const isMobile = useIsMobile();
   const displayHomePage = !foodItemData;
   const displaySider = !isMobile
 

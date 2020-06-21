@@ -1,21 +1,23 @@
 import React, { useContext } from "react";
+import { useRecoilValue } from "recoil";
 
 import NutritionFactsTable from "./NutritionFactsTable";
 import { Row, Drawer, Button } from "antd";
 import NutritionFactsHistogram from "./NutritionFactsHistogram";
 import AppContext from "../AppContext";
 
+import { isMobileState } from "../util/useIsMobile";
+
 import "./NutritionFactsPanel.scss";
 import Sidebar from "../Sidebar/Sidebar";
 import ServingSizeSelectionRow from "../Sidebar/ServingSizeSelectionRow";
 
 export default function NutritionFactsPanel({ className }) {
-  const {
-    foodItemData,
-    isMobile,
-    displayDrawer,
-    setDisplayDrawer,
-  } = useContext(AppContext);
+  const { foodItemData, displayDrawer, setDisplayDrawer } = useContext(
+    AppContext
+  );
+
+  const isMobile = useRecoilValue(isMobileState);
 
   const MobileHeader = () =>
     isMobile && (
