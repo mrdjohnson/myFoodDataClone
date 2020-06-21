@@ -1,4 +1,5 @@
 import React, { createContext, useState, useEffect } from "react";
+import { useSetRecoilState } from "recoil";
 import Axios from "axios";
 import { useHistory } from "react-router-dom";
 
@@ -6,6 +7,8 @@ import formatFoodItemData, {
   formatFoodItemDataFromQueryParams,
 } from "./util/format_food_item_data";
 import getQueryParamsFromHistory from "./util/getQueryParamsFromHistory";
+
+import { displayDrawerState } from "./recoil/displayDrawerState";
 
 const AppContext = createContext();
 
@@ -17,7 +20,7 @@ const UrlUpdateStrategy = { REPLACE: "REPLACE", PUSH: "PUSH", NONE: "NONE" };
 
 export const AppProvider = ({ children }) => {
   const [foodItemData, setFoodItemData] = useState();
-  const [displayDrawer, setDisplayDrawer] = useState(false);
+  const setDisplayDrawer = useSetRecoilState(displayDrawerState);
   const history = useHistory();
 
   // run on mount only
@@ -121,9 +124,6 @@ export const AppProvider = ({ children }) => {
 
         updateFoodWithSelectedQuantity,
         updateFoodWithSelectedWeight,
-
-        displayDrawer,
-        setDisplayDrawer,
       }}
     >
       {children}
