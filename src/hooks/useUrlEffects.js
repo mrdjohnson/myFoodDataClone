@@ -7,14 +7,12 @@ import {
   foodItemDataQueryStringState,
 } from "../recoil/foodItemDataState";
 
-import useAsyncRecoilValue from "../hooks/useAsyncRecoilValue";
-
 export default function useUrlEffects() {
   const history = useHistory();
-  const foodItemDataQueryString = useAsyncRecoilValue(
+  const foodItemDataQueryString = useRecoilValue(
     foodItemDataQueryStringState
   ); // /?food=171688&serv=wt2&qty=12
-  const foodItemData = useAsyncRecoilValue(foodItemDataState);
+  const foodItemData = useRecoilValue(foodItemDataState);
   const quantityWeightIndex = useRecoilValue(quantityWeightIndexState);
 
   // run when foodItemData changes

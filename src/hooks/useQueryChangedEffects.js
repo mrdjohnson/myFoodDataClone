@@ -10,7 +10,6 @@ import { useHistory } from "react-router-dom";
 import { validQuantityWeightIndexFromQueryParams } from "../util/format_food_item_data";
 import getQueryParamsFromHistory from "../util/getQueryParamsFromHistory";
 import useSetFoodItemDataName from "../hooks/useSetFoodItemDataName";
-import useAsyncRecoilValue from "../hooks/useAsyncRecoilValue";
 
 import {
   foodItemQueryParamsState,

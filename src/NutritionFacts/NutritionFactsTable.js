@@ -1,6 +1,5 @@
 import React from "react";
-
-import useAsyncRecoilValue from "../hooks/useAsyncRecoilValue"
+import { useRecoilValue } from "recoil";
 
 import { Row } from "antd";
 import { foodItemDataNutritionFactsState } from "../recoil/foodItemDataState";
@@ -8,7 +7,7 @@ import { foodItemDataNutritionFactsState } from "../recoil/foodItemDataState";
 import "./NutritionFactsTable.scss";
 
 function NutritionFactsTable() {
-  const foodItemDataNutritionFacts = useAsyncRecoilValue(
+  const foodItemDataNutritionFacts = useRecoilValue(
     foodItemDataNutritionFactsState
   );
 

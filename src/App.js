@@ -10,7 +10,6 @@ import useIsMobile from "./hooks/useIsMobile";
 import { foodItemDataState } from "./recoil/foodItemDataState";
 
 import useAppEffects from "./hooks/useAppEffects";
-import useAsyncRecoilValue from "./hooks/useAsyncRecoilValue";
 
 import logo from "./assets/logo.svg";
 
@@ -21,7 +20,7 @@ const { Header, Content, Footer } = Layout;
 function App() {
   useAppEffects();
 
-  const foodItemData = useAsyncRecoilValue(foodItemDataState);
+  const foodItemData = useRecoilValue(foodItemDataState);
   const isMobile = useIsMobile();
   const displayHomePage = !foodItemData;
   const displaySider = !isMobile;

@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useSetRecoilState, useResetRecoilState } from "recoil";
+import { useRecoilValue, useSetRecoilState, useResetRecoilState } from "recoil";
 
 import { displayDrawerState } from "../recoil/displayDrawerState";
 import {
@@ -9,8 +9,6 @@ import {
 
 import useUrlEffects from "./useUrlEffects";
 
-import useAsyncRecoilValue from "./useAsyncRecoilValue";
-
 import useQueryChangedEffects from "./useQueryChangedEffects";
 
 export default function useAppEffects() {
@@ -18,7 +16,7 @@ export default function useAppEffects() {
   useQueryChangedEffects();
 
   const setDisplayDrawer = useSetRecoilState(displayDrawerState);
-  const foodItemData = useAsyncRecoilValue(foodItemDataState);
+  const foodItemData = useRecoilValue(foodItemDataState);
   const resetQuantityWeightIndex = useResetRecoilState(
     quantityWeightIndexState
   );

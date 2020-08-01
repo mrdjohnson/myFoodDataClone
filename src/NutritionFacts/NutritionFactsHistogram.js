@@ -1,16 +1,15 @@
 import React from "react";
+import { useRecoilValue } from "recoil";
 
 import { foodItemDataState } from "../recoil/foodItemDataState";
 import { Row, Col } from "antd";
-
-import useAsyncRecoilValue from "../hooks/useAsyncRecoilValue";
 
 import _ from "lodash";
 
 import "./NutritionFactsHistogram.scss";
 
 export default function NutritionFactsHistogram() {
-  const foodItemData = useAsyncRecoilValue(foodItemDataState);
+  const foodItemData = useRecoilValue(foodItemDataState);
 
   if (!foodItemData) return null;
 

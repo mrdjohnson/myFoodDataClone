@@ -1,13 +1,13 @@
 import React from "react";
+import { useRecoilValue } from "recoil"
 
 import { List } from "antd";
 import SidebarFoodCard from "./SidebarFoodCard";
 
 import { foodItemDataState } from "../recoil/foodItemDataState";
-import useAsyncRecoilValue from "../hooks/useAsyncRecoilValue"
 
 function SideBarFoodList() {
-  const foodItemData = useAsyncRecoilValue(foodItemDataState);
+  const foodItemData = useRecoilValue(foodItemDataState);
 
   if (!foodItemData) return null;
 

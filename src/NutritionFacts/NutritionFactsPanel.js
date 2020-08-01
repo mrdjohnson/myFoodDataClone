@@ -9,14 +9,12 @@ import { isMobileState } from "../hooks/useIsMobile";
 import { displayDrawerState } from "../recoil/displayDrawerState";
 import { foodItemDataState } from "../recoil/foodItemDataState";
 
-import useAsyncRecoilValue from "../hooks/useAsyncRecoilValue"
-
 import "./NutritionFactsPanel.scss";
 import Sidebar from "../Sidebar/Sidebar";
 import ServingSizeSelectionRow from "../Sidebar/ServingSizeSelectionRow";
 
 export default function NutritionFactsPanel({ className }) {
-  const foodItemData = useAsyncRecoilValue(foodItemDataState);
+  const foodItemData = useRecoilValue(foodItemDataState);
   const [displayDrawer, setDisplayDrawer] = useRecoilState(displayDrawerState);
   const isMobile = useRecoilValue(isMobileState);
 
