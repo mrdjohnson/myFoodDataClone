@@ -1,29 +1,23 @@
 import { atom, selector, DefaultValue } from "recoil";
 import { calculateNutritionalFactTable } from "../util/format_food_item_data";
 
-export const foodItemDataNameState = atom({
+export const foodItemDataNameState = selector({
   key: "foodItemDataNameState",
-});
-
-const foodItemDataAtom = atom({
-  key: "foodItemDataAtom",
-  default: null,
-});
-
-export const foodItemDataState = selector({
-  key: "foodItemDataState",
   get: ({ get }) => {
-    const foodItemData = get(foodItemDataAtom);
+    const foodItemData = get(foodItemDataState);
+    console.log("get:foodItemDataNameState", foodItemData);
+    return foodItemData && foodItemData.name;
+  }
+});
 
-    if (!foodItemData) return null;
+export const foodItemQueryParamsState = atom({
+  key: "foodItemQueryParamsState",
+  default: {},
+});
 
-    return {
-      ...foodItemData,
-      id: foodItemData.ndbstring,
-      name: foodItemData.names[0],
-    };
-  },
-  set: ({ set }, newValue) => set(foodItemDataAtom, newValue),
+export const foodItemDataState = atom({
+  key: "foodItemDataState",
+  default: null,
 });
 
 export const selectedQuantityState = atom({
@@ -51,7 +45,7 @@ export const quantityWeightIndexState = selector({
     console.log("set->quantityWeightIndexState");
     const defaultOrKey = (key) =>
       newValue instanceof DefaultValue ? newValue : newValue[key];
-      
+
     set(selectedQuantityState, defaultOrKey("selectedQuantity"));
     set(selectedWeightIndexState, defaultOrKey("selectedWeightIndex"));
   },
@@ -91,6 +85,8 @@ export const foodItemDataQueryStringState = selector({
     const foodItemData = get(foodItemDataState);
     const quantityWeightIndex = get(quantityWeightIndexState);
 
+    console.log("foodItemDataURLState:", foodItemData, quantityWeightIndex);
+
     if (!foodItemData) return "";
 
     const { id } = foodItemData;
@@ -99,6 +95,7 @@ export const foodItemDataQueryStringState = selector({
 
     const queryString = `?food=${id}&serv=${servingCode}&qty=${selectedQuantity}`;
 
+    console.log("queryString:", queryString);
     return queryString;
   },
 });

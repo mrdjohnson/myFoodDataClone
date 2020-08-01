@@ -11,6 +11,8 @@ export default async function getQueryParamsFromHistory(history) {
   const idToNameMap = await import("../fixtures/id_to_name_map.json");
   const foodName = idToNameMap[foodId];
 
+  console.log("got food nameL" , foodName, foodId)
+
   return {
     foodName,
     servingWeight,

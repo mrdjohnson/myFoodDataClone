@@ -14,6 +14,8 @@ import "./SidebarFoodCard.scss";
 
 function SidebarFoodCard({ foodItemData }) {
   const resetFoodItemData = useResetRecoilState(foodItemDataState);
+  // const resetFoodItemData = () => null;
+
 
   const closeButton = (
     <Tooltip title="close">

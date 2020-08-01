@@ -6,8 +6,11 @@ import Sidebar from "./Sidebar/Sidebar";
 import NutritionFactsPanel from "./NutritionFacts/NutritionFactsPanel";
 import HomePage from "./HomePage";
 
-import useIsMobile from "./util/useIsMobile";
+import useIsMobile from "./hooks/useIsMobile";
 import { foodItemDataState } from "./recoil/foodItemDataState";
+
+import useAppEffects from "./hooks/useAppEffects";
+import useAsyncRecoilValue from "./hooks/useAsyncRecoilValue";
 
 import logo from "./assets/logo.svg";
 
@@ -16,10 +19,14 @@ import "./App.scss";
 const { Header, Content, Footer } = Layout;
 
 function App() {
-  const foodItemData = useRecoilValue(foodItemDataState);
+  useAppEffects();
+
+  const foodItemData = useAsyncRecoilValue(foodItemDataState);
   const isMobile = useIsMobile();
   const displayHomePage = !foodItemData;
   const displaySider = !isMobile;
+
+  console.log("app:foodItemData:", foodItemData);
 
   const AppFooter = () => (
     <>

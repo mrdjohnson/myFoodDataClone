@@ -5,16 +5,18 @@ import NutritionFactsTable from "./NutritionFactsTable";
 import { Row, Drawer, Button } from "antd";
 import NutritionFactsHistogram from "./NutritionFactsHistogram";
 
-import { isMobileState } from "../util/useIsMobile";
+import { isMobileState } from "../hooks/useIsMobile";
 import { displayDrawerState } from "../recoil/displayDrawerState";
 import { foodItemDataState } from "../recoil/foodItemDataState";
+
+import useAsyncRecoilValue from "../hooks/useAsyncRecoilValue"
 
 import "./NutritionFactsPanel.scss";
 import Sidebar from "../Sidebar/Sidebar";
 import ServingSizeSelectionRow from "../Sidebar/ServingSizeSelectionRow";
 
 export default function NutritionFactsPanel({ className }) {
-  const foodItemData = useRecoilValue(foodItemDataState);
+  const foodItemData = useAsyncRecoilValue(foodItemDataState);
   const [displayDrawer, setDisplayDrawer] = useRecoilState(displayDrawerState);
   const isMobile = useRecoilValue(isMobileState);
 
@@ -46,7 +48,7 @@ export default function NutritionFactsPanel({ className }) {
       <div className="facts-panel-body">
         <Row
           className="serving-selector"
-          style={{ "border-bottom": "1px solid #ddd" }}
+          style={{ borderBottom: "1px solid #ddd" }}
         >
           Serving Size:
         </Row>

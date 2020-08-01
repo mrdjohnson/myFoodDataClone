@@ -1,9 +1,8 @@
 import React, { useState } from "react";
-import { useSetRecoilState } from "recoil";
 
 import { Select } from "antd";
 
-import { foodItemDataNameState } from "../recoil/foodItemDataState";
+import useSetFoodItemDataName from "../hooks/useSetFoodItemDataName";
 
 import Axios from "axios";
 import _ from "lodash";
@@ -16,7 +15,7 @@ function Searchbar({ placeholder = "🔍 Find Another Food" }) {
   const [searchValue, setSearchValue] = useState();
   const [foodItems, setFoodItems] = useState([]);
 
-  const setFoodItemDataName = useSetRecoilState(foodItemDataNameState);
+  const setFoodItemDataName = useSetFoodItemDataName();
 
   const searchFoodItems = _.debounce((foodSearchString) => {
     setFoodItems([]);
@@ -36,7 +35,7 @@ function Searchbar({ placeholder = "🔍 Find Another Food" }) {
     });
   }, 300);
 
-  const updateSearchedValue = (searchedFoodItem) => {
+  function updateSearchedValue(searchedFoodItem) {
     console.log("selected: ", searchedFoodItem);
 
     if (_.isEmpty(searchedFoodItem)) {
@@ -45,7 +44,7 @@ function Searchbar({ placeholder = "🔍 Find Another Food" }) {
       setSearchValue(searchedFoodItem);
       setFoodItemDataName(searchedFoodItem);
     }
-  };
+  }
 
   const renderHighlightedFoodItem = (foodItem) => {
     return (
