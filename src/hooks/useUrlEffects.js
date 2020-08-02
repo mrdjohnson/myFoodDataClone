@@ -9,9 +9,7 @@ import {
 
 export default function useUrlEffects() {
   const history = useHistory();
-  const foodItemDataQueryString = useRecoilValue(
-    foodItemDataQueryStringState
-  ); // /?food=171688&serv=wt2&qty=12
+  const foodItemDataQueryString = useRecoilValue(foodItemDataQueryStringState);
   const foodItemData = useRecoilValue(foodItemDataState);
   const quantityWeightIndex = useRecoilValue(quantityWeightIndexState);
 
@@ -27,11 +25,7 @@ export default function useUrlEffects() {
 
   const updateUrlWithFood = useCallback(
     (replaceHistory) => {
-      // todo do I need this?
-      if (!foodItemDataQueryString) return;
-
       const queryString = foodItemDataQueryString;
-
 
       if (replaceHistory) {
         history.replace(queryString);
