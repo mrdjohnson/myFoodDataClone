@@ -1,8 +1,10 @@
 import React, { useState } from "react";
+import { useRecoilValue, useSetRecoilState, useResetRecoilState } from "recoil";
 
 import { Select } from "antd";
 
 import useSetFoodItemDataName from "../hooks/useSetFoodItemDataName";
+import { displayDrawerState } from "../recoil/displayDrawerState";
 
 import Axios from "axios";
 import _ from "lodash";
@@ -14,6 +16,7 @@ const { Option } = Select;
 function Searchbar({ placeholder = "🔍 Find Another Food" }) {
   const [searchValue, setSearchValue] = useState();
   const [foodItems, setFoodItems] = useState([]);
+  const setDisplayDrawer = useSetRecoilState(displayDrawerState);
 
   const setFoodItemDataName = useSetFoodItemDataName();
 
@@ -43,6 +46,7 @@ function Searchbar({ placeholder = "🔍 Find Another Food" }) {
     } else {
       setSearchValue(searchedFoodItem);
       setFoodItemDataName(searchedFoodItem);
+      // setDisplayDrawer(false);
     }
   }
 

@@ -1,11 +1,24 @@
-import { useSetRecoilState } from "recoil";
-import { foodItemDataState } from "../recoil/foodItemDataState";
+import { useSetRecoilState, useResetRecoilState } from "recoil";
+import {
+  foodItemDataState,
+  quantityWeightIndexState,
+} from "../recoil/foodItemDataState";
+import { displayDrawerState } from "../recoil/displayDrawerState";
 import Axios from "axios";
 
 export default function useSetFoodItemDataName() {
   const setFoodItemData = useSetRecoilState(foodItemDataState);
+  const setDisplayDrawer = useSetRecoilState(displayDrawerState);
+  const resetQuantityWeightIndex = useResetRecoilState(
+    quantityWeightIndexState
+  );
 
-  return (name) => fetchAndAssignFoodItemData(name).then(setFoodItemData);
+  return (name) => {
+    fetchAndAssignFoodItemData(name).then(setFoodItemData);
+
+    setDisplayDrawer(false);
+    resetQuantityWeightIndex();
+  };
 }
 
 const fetchAndAssignFoodItemData = async (foodItemDataName) => {

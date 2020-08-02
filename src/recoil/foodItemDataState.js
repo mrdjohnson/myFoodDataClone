@@ -5,7 +5,6 @@ export const foodItemDataNameState = selector({
   key: "foodItemDataNameState",
   get: ({ get }) => {
     const foodItemData = get(foodItemDataState);
-    console.log("get:foodItemDataNameState", foodItemData);
     return foodItemData && foodItemData.name;
   }
 });
@@ -85,8 +84,6 @@ export const foodItemDataQueryStringState = selector({
     const foodItemData = get(foodItemDataState);
     const quantityWeightIndex = get(quantityWeightIndexState);
 
-    console.log("foodItemDataURLState:", foodItemData, quantityWeightIndex);
-
     if (!foodItemData) return "";
 
     const { id } = foodItemData;
@@ -95,7 +92,6 @@ export const foodItemDataQueryStringState = selector({
 
     const queryString = `?food=${id}&serv=${servingCode}&qty=${selectedQuantity}`;
 
-    console.log("queryString:", queryString);
     return queryString;
   },
 });
