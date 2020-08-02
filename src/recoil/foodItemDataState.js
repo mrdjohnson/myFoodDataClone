@@ -41,7 +41,6 @@ export const quantityWeightIndexState = selector({
     };
   },
   set: ({ set }, newValue) => {
-    console.log("set->quantityWeightIndexState");
     const defaultOrKey = (key) =>
       newValue instanceof DefaultValue ? newValue : newValue[key];
 
@@ -57,8 +56,6 @@ const foodItemDataWithSelectedState = selector({
     const quantityWeightIndex = get(quantityWeightIndexState);
 
     if (!foodItemData) return null;
-
-    console.log(":quantityWeightIndex", quantityWeightIndex);
 
     return {
       ...foodItemData,

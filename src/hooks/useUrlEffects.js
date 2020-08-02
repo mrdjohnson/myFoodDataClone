@@ -17,16 +17,11 @@ export default function useUrlEffects() {
 
   // run when foodItemData changes
   useEffect(() => {
-    console.log("foodItemData changed", foodItemData && foodItemData.name);
     updateUrlWithFood(false);
   }, [foodItemData]);
 
   // run when quantityWeightIndex changes
   useEffect(() => {
-    console.log(
-      "quantityWeightIndex changed",
-      foodItemData && foodItemData.name
-    );
     updateUrlWithFood(true);
   }, [quantityWeightIndex]);
 
@@ -37,19 +32,11 @@ export default function useUrlEffects() {
 
       const queryString = foodItemDataQueryString;
 
-      console.log(
-        "queryString:",
-        queryString,
-        "replaceHistory:",
-        replaceHistory
-      );
 
       if (replaceHistory) {
         history.replace(queryString);
-        console.log("history : replaced");
       } else {
         history.push(queryString);
-        console.log("history : pushed");
       }
     },
     [foodItemDataQueryString, history]

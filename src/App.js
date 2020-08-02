@@ -25,8 +25,6 @@ function App() {
   const displayHomePage = !foodItemData;
   const displaySider = !isMobile;
 
-  console.log("app:foodItemData:", foodItemData);
-
   const AppFooter = () => (
     <>
       <div className="app-footer-links">

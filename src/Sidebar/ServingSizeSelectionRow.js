@@ -43,7 +43,6 @@ function ServingSizeSelectionRow({ foodItemData }) {
   const updateSelectedQuantity = (selectedQuantity) => {
     if (MIN_QUANTITY <= selectedQuantity && selectedQuantity < MAX_QUANTITY) {
       setSelectedQuantity(selectedQuantity);
-      console.log("updateSelectedQuantity", selectedQuantity);
     }
   };
 

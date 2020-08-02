@@ -43,22 +43,15 @@ export default function useAppEffects() {
 
   // run on mount only
   useEffect(() => {
-    console.log("getting query params from mount");
     updateFoodItemDataFromQueryParams();
   }, []);
 
   // run on mount only
   useEffect(() => {
-    console.log("foodItemQueryParams changed");
   }, [foodItemQueryParams]);
 
   // run on mount only
   useEffect(() => {
-    console.log(
-      "foodItemQueryParams or foodItemData updated: ",
-      foodItemQueryParams,
-      foodItemData
-    );
 
     if (foodItemData && foodItemQueryParams.foodName === foodItemDataName) {
       const { servingWeight, quantity } = foodItemQueryParams;
@@ -71,17 +64,14 @@ export default function useAppEffects() {
         )
       );
 
-      console.log("reseting foodItemQueryParams");
       resetFoodItemQueryParams();
     }
   }, [foodItemQueryParams, foodItemData, foodItemDataName]);
 
   function updateFoodItemDataFromQueryParams() {
     return getQueryParamsFromHistory(history).then((queryParams) => {
-      console.log("got query params, setting foodItem query", queryParams);
       setFoodItemQueryParams(queryParams);
 
-      console.log("setting name", queryParams.foodName);
       setFoodItemDataName(queryParams.foodName);
     });
   }
