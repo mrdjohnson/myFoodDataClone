@@ -8,8 +8,6 @@ import ServingSizeSelectionRow from "./ServingSizeSelectionRow";
 
 import { foodItemDataState } from "../recoil/foodItemDataState";
 
-import _ from "lodash";
-
 import "./SidebarFoodCard.scss";
 
 function SidebarFoodCard({ foodItemData }) {

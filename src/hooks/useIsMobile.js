@@ -1,8 +1,6 @@
 import { useEffect } from "react";
 import { atom, useRecoilState } from "recoil";
 
-import _ from "lodash";
-
 const MOBILE_BREAKPOINT = 768;
 
 export const isMobileState = atom({
