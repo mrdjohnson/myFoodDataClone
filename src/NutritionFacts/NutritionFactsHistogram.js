@@ -1,6 +1,7 @@
-import React, { useContext } from "react";
-import AppContext from "../AppContext";
+import React from "react";
+import { useRecoilValue } from "recoil";
 
+import { foodItemDataState } from "../recoil/foodItemDataState";
 import { Row, Col } from "antd";
 
 import _ from "lodash";
@@ -8,7 +9,7 @@ import _ from "lodash";
 import "./NutritionFactsHistogram.scss";
 
 export default function NutritionFactsHistogram() {
-  const { foodItemData } = useContext(AppContext);
+  const foodItemData = useRecoilValue(foodItemDataState);
 
   if (!foodItemData) return null;
 

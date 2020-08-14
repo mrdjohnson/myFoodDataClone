@@ -1,21 +1,22 @@
-import React, { useContext } from "react";
+import React from "react";
+import { useRecoilValue, useRecoilState } from "recoil";
 
 import NutritionFactsTable from "./NutritionFactsTable";
 import { Row, Drawer, Button } from "antd";
 import NutritionFactsHistogram from "./NutritionFactsHistogram";
-import AppContext from "../AppContext";
+
+import { isMobileState } from "../hooks/useIsMobile";
+import { displayDrawerState } from "../recoil/displayDrawerState";
+import { foodItemDataState } from "../recoil/foodItemDataState";
 
 import "./NutritionFactsPanel.scss";
 import Sidebar from "../Sidebar/Sidebar";
 import ServingSizeSelectionRow from "../Sidebar/ServingSizeSelectionRow";
 
 export default function NutritionFactsPanel({ className }) {
-  const {
-    foodItemData,
-    isMobile,
-    displayDrawer,
-    setDisplayDrawer,
-  } = useContext(AppContext);
+  const foodItemData = useRecoilValue(foodItemDataState);
+  const [displayDrawer, setDisplayDrawer] = useRecoilState(displayDrawerState);
+  const isMobile = useRecoilValue(isMobileState);
 
   const MobileHeader = () =>
     isMobile && (
@@ -45,7 +46,7 @@ export default function NutritionFactsPanel({ className }) {
       <div className="facts-panel-body">
         <Row
           className="serving-selector"
-          style={{ "border-bottom": "1px solid #ddd" }}
+          style={{ borderBottom: "1px solid #ddd" }}
         >
           Serving Size:
         </Row>

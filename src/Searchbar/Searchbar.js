@@ -1,7 +1,8 @@
-import React, { useState, useContext } from "react";
-import AppContext from "../AppContext";
+import React, { useState } from "react";
 
 import { Select } from "antd";
+
+import useSetFoodItemDataName from "../hooks/useSetFoodItemDataName";
 
 import Axios from "axios";
 import _ from "lodash";
@@ -14,7 +15,7 @@ function Searchbar({ placeholder = "🔍 Find Another Food" }) {
   const [searchValue, setSearchValue] = useState();
   const [foodItems, setFoodItems] = useState([]);
 
-  const { fetchFoodItemData } = useContext(AppContext);
+  const setFoodItemDataName = useSetFoodItemDataName();
 
   const searchFoodItems = _.debounce((foodSearchString) => {
     setFoodItems([]);
@@ -34,16 +35,16 @@ function Searchbar({ placeholder = "🔍 Find Another Food" }) {
     });
   }, 300);
 
-  const updateSearchedValue = (searchedFoodItem) => {
+  function updateSearchedValue(searchedFoodItem) {
     console.log("selected: ", searchedFoodItem);
 
     if (_.isEmpty(searchedFoodItem)) {
       setSearchValue(undefined);
     } else {
       setSearchValue(searchedFoodItem);
-      fetchFoodItemData(searchedFoodItem);
+      setFoodItemDataName(searchedFoodItem);
     }
-  };
+  }
 
   const renderHighlightedFoodItem = (foodItem) => {
     return (
@@ -76,7 +77,7 @@ function foodItemWithHighlights(foodItem, substringToHighlight) {
   const saltedFoodItem = _.replace(
     foodItem,
     caseInsensitiveGlobalSearch,
-    text => `<=>${text}<=>`
+    (text) => `<=>${text}<=>`
   );
 
   const splitText = saltedFoodItem.split("<=>");
