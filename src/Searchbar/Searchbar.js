@@ -26,7 +26,7 @@ function Searchbar({ placeholder = "🔍 Find Another Food" }) {
     }
 
     Axios.get(
-      `https://us-central1-fasttripfinder-199123.cloudfunctions.net/my-food-data-proxy/?query=name-suggest.php?q=${foodSearchString}`
+      `https://us-central1-fasttripfinder-199123.cloudfunctions.net/my-food-data-search-proxy/?query=autocomplete/${foodSearchString}`
     ).then(({ data }) => {
       const foodResponseItems = data.trim().split(",");
 

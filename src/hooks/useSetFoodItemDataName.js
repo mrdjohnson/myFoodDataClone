@@ -24,15 +24,17 @@ export default function useSetFoodItemDataName() {
 const fetchAndAssignFoodItemData = async (foodItemDataName) => {
   if (!foodItemDataName) return null;
 
-  const { data: foodItemData } = await Axios.get(
-    `https://us-central1-fasttripfinder-199123.cloudfunctions.net/my-food-data-proxy/?query=data-update-nf.php?name=${foodItemDataName}`
+  const { data } = await Axios.get(
+    `https://us-central1-fasttripfinder-199123.cloudfunctions.net/my-food-data-search-proxy/?query=food/${foodItemDataName}`
   );
+
+  const foodItemData = data[0];
 
   return (
     foodItemData && {
       ...foodItemData,
       id: foodItemData.ndbstring,
-      name: foodItemData.names[0],
+      name: foodItemData.name3,
     }
   );
 };

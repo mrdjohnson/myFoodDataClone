@@ -60,7 +60,7 @@ export default function NutritionFactsPanel({ className }) {
       <MobileHeader />
 
       <h1 className="facts-panel-header">{foodItemData.name}</h1>
-      <div className="facts-panel-subheader">{foodItemData.longname}</div>
+      <div className="facts-panel-subheader">{foodItemData.food_description}</div>
 
       <div>
         <strong>Database: </strong>

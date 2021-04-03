@@ -6,6 +6,8 @@ const MAX_QUANTITY = 10000;
 export function calculateNutritionalFactTable(foodItemData) {
   const nutritionFactsByKey = nutritionFactsFromFoodData(foodItemData);
 
+  debugger
+
   return {
     calories: nutritionFactsByKey("ENERC_KCAL", 2000),
     totalFat: nutritionFactsByKey("FAT", 65),
@@ -31,10 +33,10 @@ const missingData = { value: "~", percentage: "~" };
 
 function nutritionFactsFromFoodData(foodItemData) {
   const { selectedQuantity, selectedWeightIndex } = foodItemData;
-  const ratio = _.toNumber(foodItemData.wt_arr[selectedWeightIndex]) / 100;
+  const ratio = _.toNumber(foodItemData['GmWt_' +selectedWeightIndex]) / 100;
 
   return (key, dailyValue = 1) => {
-    if (!foodItemData[key][0]) return missingData;
+    if (!foodItemData[key]) return missingData;
 
     const base = _.toNumber(foodItemData[key]) * ratio * selectedQuantity;
 
@@ -54,13 +56,14 @@ function validQuantity(quantity) {
 }
 
 function weightIndexFromServingWeight(foodItemData, servingWeight) {
-  const weightIndex = _.indexOf(foodItemData.code_arr, servingWeight);
+  return 1
+  // const weightIndex = _.indexOf(foodItemData.code_arr, servingWeight);
 
-  if (weightIndex < 0) {
-    return 0;
-  }
+  // if (weightIndex < 0) {
+  //   return 0;
+  // }
 
-  return weightIndex;
+  // return weightIndex;
 }
 
 export function validQuantityWeightIndexFromQueryParams(

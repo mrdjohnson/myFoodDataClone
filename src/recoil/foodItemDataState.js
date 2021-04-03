@@ -26,7 +26,7 @@ export const selectedQuantityState = atom({
 
 export const selectedWeightIndexState = atom({
   key: "selectedWeightIndexState",
-  default: 0,
+  default: 1,
 });
 
 export const quantityWeightIndexState = selector({
@@ -85,7 +85,7 @@ export const foodItemDataQueryStringState = selector({
 
     const { id } = foodItemData;
     const { selectedQuantity, selectedWeightIndex } = quantityWeightIndex;
-    const servingCode = foodItemData.code_arr[selectedWeightIndex];
+    const servingCode = foodItemData['GmWt_Desc' + selectedWeightIndex];
 
     const queryString = `?food=${id}&serv=${servingCode}&qty=${selectedQuantity}`;
 

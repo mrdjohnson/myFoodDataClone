@@ -26,10 +26,8 @@ function ServingSizeSelectionRow({ foodItemData }) {
     selectedWeightIndexState
   );
 
-  const servingDescriptions = foodItemData["desc_arr"];
-  const servingWeights = foodItemData["wt_arr"].map(_.toInteger);
-  const servings = _.zip(servingDescriptions, servingWeights).map(
-    ([description, weight]) => `${description} (${weight}g)`
+  const servings = _.values(JSON.parse(foodItemData.servingsizes)).map(
+    ([weight, description]) => `${description} (${weight}g)`
   );
 
   const selectedWeight = servings[selectedWeightIndex];
