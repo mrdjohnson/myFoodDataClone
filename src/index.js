@@ -7,7 +7,7 @@ import { BrowserRouter } from "react-router-dom";
 import { RecoilRoot } from "recoil";
 
 ReactDOM.render(
-  <BrowserRouter>
+  <BrowserRouter basename="myFoodDataClone">
     <RecoilRoot>
       <App />
     </RecoilRoot>
