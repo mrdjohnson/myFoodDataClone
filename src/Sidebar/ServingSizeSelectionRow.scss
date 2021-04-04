@@ -38,7 +38,9 @@
   }
 
   .ant-select-selection-item {
-    white-space: normal;
-    line-height: 22px !important;
+  white-space: normal;
+  line-height: 22px !important;
+  display: flex;
+  align-items: center;
   }
 }
