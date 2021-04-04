@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "1047f4ad8d6dd114fb4eb99080fcb753",
+    "revision": "a49add21d3d70f550fad060d609306b3",
     "url": "/myFoodDataClone/index.html"
   },
   {
