@@ -1,27 +1,25 @@
 {
   "files": {
-    "main.css": "/myFoodDataClone/static/css/main.e02723a7.chunk.css",
-    "main.js": "/myFoodDataClone/static/js/main.4c2c63d6.chunk.js",
-    "main.js.map": "/myFoodDataClone/static/js/main.4c2c63d6.chunk.js.map",
-    "runtime-main.js": "/myFoodDataClone/static/js/runtime-main.2357ffec.js",
-    "runtime-main.js.map": "/myFoodDataClone/static/js/runtime-main.2357ffec.js.map",
-    "static/css/2.a72c35d3.chunk.css": "/myFoodDataClone/static/css/2.a72c35d3.chunk.css",
-    "static/js/2.b1dbb3d6.chunk.js": "/myFoodDataClone/static/js/2.b1dbb3d6.chunk.js",
-    "static/js/2.b1dbb3d6.chunk.js.map": "/myFoodDataClone/static/js/2.b1dbb3d6.chunk.js.map",
-    "static/js/3.2a759879.chunk.js": "/myFoodDataClone/static/js/3.2a759879.chunk.js",
-    "static/js/3.2a759879.chunk.js.map": "/myFoodDataClone/static/js/3.2a759879.chunk.js.map",
+    "main.css": "/myFoodDataClone/static/css/main.42bc29ec.chunk.css",
+    "main.js": "/myFoodDataClone/static/js/main.ca6b39fb.chunk.js",
+    "main.js.map": "/myFoodDataClone/static/js/main.ca6b39fb.chunk.js.map",
+    "runtime-main.js": "/myFoodDataClone/static/js/runtime-main.b5c5d174.js",
+    "runtime-main.js.map": "/myFoodDataClone/static/js/runtime-main.b5c5d174.js.map",
+    "static/css/2.e10332d9.chunk.css": "/myFoodDataClone/static/css/2.e10332d9.chunk.css",
+    "static/js/2.ea4b6030.chunk.js": "/myFoodDataClone/static/js/2.ea4b6030.chunk.js",
+    "static/js/2.ea4b6030.chunk.js.map": "/myFoodDataClone/static/js/2.ea4b6030.chunk.js.map",
     "index.html": "/myFoodDataClone/index.html",
-    "precache-manifest.713c83ad97541d0b036c3da7e05abac6.js": "/myFoodDataClone/precache-manifest.713c83ad97541d0b036c3da7e05abac6.js",
+    "precache-manifest.c748e81f6c3b5700ad77c6a36196aa8e.js": "/myFoodDataClone/precache-manifest.c748e81f6c3b5700ad77c6a36196aa8e.js",
     "service-worker.js": "/myFoodDataClone/service-worker.js",
-    "static/css/2.a72c35d3.chunk.css.map": "/myFoodDataClone/static/css/2.a72c35d3.chunk.css.map",
-    "static/css/main.e02723a7.chunk.css.map": "/myFoodDataClone/static/css/main.e02723a7.chunk.css.map",
+    "static/css/2.e10332d9.chunk.css.map": "/myFoodDataClone/static/css/2.e10332d9.chunk.css.map",
+    "static/css/main.42bc29ec.chunk.css.map": "/myFoodDataClone/static/css/main.42bc29ec.chunk.css.map",
     "static/media/logo.svg": "/myFoodDataClone/static/media/logo.8357fd40.svg"
   },
   "entrypoints": [
-    "static/js/runtime-main.2357ffec.js",
-    "static/css/2.a72c35d3.chunk.css",
-    "static/js/2.b1dbb3d6.chunk.js",
-    "static/css/main.e02723a7.chunk.css",
-    "static/js/main.4c2c63d6.chunk.js"
+    "static/js/runtime-main.b5c5d174.js",
+    "static/css/2.e10332d9.chunk.css",
+    "static/js/2.ea4b6030.chunk.js",
+    "static/css/main.42bc29ec.chunk.css",
+    "static/js/main.ca6b39fb.chunk.js"
   ]
 }
