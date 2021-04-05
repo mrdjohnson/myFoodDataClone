@@ -5,8 +5,8 @@ const MAX_QUANTITY = 10000;
 
 export function calculateNutritionalFactTable(foodItemData) {
   const nutritionFactsByKey = nutritionFactsFromFoodData(foodItemData);
-
-  debugger
+  const { servings, selectedWeight } = foodItemData;
+  const { description } = servings[selectedWeight];
 
   return {
     calories: nutritionFactsByKey("ENERC_KCAL", 2000),
@@ -26,14 +26,15 @@ export function calculateNutritionalFactTable(foodItemData) {
     calcium: nutritionFactsByKey("CA", 1300),
     potassium: nutritionFactsByKey("K", 4700),
     phosphorus: nutritionFactsByKey("P", 1250),
+    servingDescription: description,
   };
 }
 
 const missingData = { value: "~", percentage: "~" };
 
 function nutritionFactsFromFoodData(foodItemData) {
-  const { selectedQuantity, selectedWeightIndex } = foodItemData;
-  const ratio = _.toNumber(foodItemData['GmWt_' +selectedWeightIndex]) / 100;
+  const { selectedQuantity, selectedWeight } = foodItemData;
+  const ratio = _.toNumber(foodItemData.servings[selectedWeight].weight) / 100;
 
   return (key, dailyValue = 1) => {
     if (!foodItemData[key]) return missingData;
@@ -55,27 +56,17 @@ function validQuantity(quantity) {
   return MIN_QUANTITY;
 }
 
-function weightIndexFromServingWeight(foodItemData, servingWeight) {
-  return 1
-  // const weightIndex = _.indexOf(foodItemData.code_arr, servingWeight);
-
-  // if (weightIndex < 0) {
-  //   return 0;
-  // }
-
-  // return weightIndex;
+function validServingWeight(foodItemData, servingWeight) {
+  return _.has(foodItemData.servings, servingWeight) ? servingWeight : "wt1";
 }
 
-export function validQuantityWeightIndexFromQueryParams(
+export function validQuantityWeightFromQueryParams(
   itemData,
   servingWeight,
   quantity
 ) {
-  const selectedQuantity = validQuantity(quantity);
-  const selectedWeightIndex = weightIndexFromServingWeight(
-    itemData,
-    servingWeight
-  );
-
-  return { selectedQuantity, selectedWeightIndex };
+  return {
+    selectedQuantity: validQuantity(quantity),
+    selectedWeight: validServingWeight(itemData, servingWeight),
+  };
 }

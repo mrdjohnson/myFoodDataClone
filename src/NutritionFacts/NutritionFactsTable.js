@@ -30,6 +30,7 @@ function NutritionFactsTable() {
     calcium,
     potassium,
     phosphorus,
+    servingDescription
   } = foodItemDataNutritionFacts;
 
   const AddedSugar = () => {
@@ -59,7 +60,7 @@ function NutritionFactsTable() {
         <div>
           <b>Serving Size</b>
         </div>
-        <div> 1 cup, quartered or chopped (125g)</div>
+        <div>{servingDescription}</div>
       </div>
 
       <Row justify="space-between" className="calories medium-border-bottom">

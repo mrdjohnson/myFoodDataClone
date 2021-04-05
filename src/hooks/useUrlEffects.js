@@ -1,38 +1,41 @@
-import { useEffect, useCallback } from "react";
-import { useRecoilValue } from "recoil";
+import { useEffect } from "react";
+import { useRecoilValue, useRecoilState } from "recoil";
 import { useHistory } from "react-router-dom";
 import {
   foodItemDataState,
-  quantityWeightIndexState,
+  quantityWeightState,
   foodItemDataQueryStringState,
 } from "../recoil/foodItemDataState";
+import _ from "lodash";
 
 export default function useUrlEffects() {
   const history = useHistory();
   const foodItemDataQueryString = useRecoilValue(foodItemDataQueryStringState);
   const foodItemData = useRecoilValue(foodItemDataState);
-  const quantityWeightIndex = useRecoilValue(quantityWeightIndexState);
+  const [quantityWeight, setQuantityWeight] = useRecoilState(
+    quantityWeightState
+  );
 
   // run when foodItemData changes
   useEffect(() => {
-    updateUrlWithFood(false);
+    if (foodItemData) {
+      setQuantityWeight(getDefaultQuantityWeight(foodItemData));
+    }
   }, [foodItemData]);
 
-  // run when quantityWeightIndex changes
+  // run when quantityWeight changes
   useEffect(() => {
-    updateUrlWithFood(true);
-  }, [quantityWeightIndex]);
+    const pathname = foodItemDataQueryString;
 
-  const updateUrlWithFood = useCallback(
-    (replaceHistory) => {
-      const queryString = foodItemDataQueryString;
-
-      if (replaceHistory) {
-        history.replace(queryString);
-      } else {
-        history.push(queryString);
-      }
-    },
-    [foodItemDataQueryString, history]
-  );
+    history.replace({ pathname });
+  }, [quantityWeight]);
 }
+
+const getDefaultQuantityWeight = (foodItemData) => {
+  const firstAvailableWeight = _.first(_.keys(foodItemData.servings));
+
+  return {
+    selectedWeight: firstAvailableWeight,
+    selectedQuantity: 1,
+  };
+};

@@ -1,23 +1,24 @@
 import { useSetRecoilState, useResetRecoilState } from "recoil";
 import {
   foodItemDataState,
-  quantityWeightIndexState,
+  quantityWeightState,
 } from "../recoil/foodItemDataState";
 import { displayDrawerState } from "../recoil/displayDrawerState";
 import Axios from "axios";
+import _ from "lodash";
 
 export default function useSetFoodItemDataName() {
   const setFoodItemData = useSetRecoilState(foodItemDataState);
   const setDisplayDrawer = useSetRecoilState(displayDrawerState);
-  const resetQuantityWeightIndex = useResetRecoilState(
-    quantityWeightIndexState
+  const resetQuantityWeight = useResetRecoilState(
+    quantityWeightState
   );
 
   return (name) => {
     fetchAndAssignFoodItemData(name).then(setFoodItemData);
 
     setDisplayDrawer(false);
-    resetQuantityWeightIndex();
+    resetQuantityWeight();
   };
 }
 
@@ -30,11 +31,19 @@ const fetchAndAssignFoodItemData = async (foodItemDataName) => {
 
   const foodItemData = data[0];
 
-  return (
-    foodItemData && {
-      ...foodItemData,
-      id: foodItemData.ndbstring,
-      name: foodItemData.name3,
-    }
-  );
+  if (!foodItemData) return null;
+
+  const servingSizes = JSON.parse(foodItemData.servingsizes);
+
+  const servings = _.mapValues(servingSizes, ([weight, description]) => ({
+    weight,
+    description: `${description} (${weight}g)`,
+  }));
+
+  return {
+    ...foodItemData,
+    id: foodItemData.ndbstring,
+    name: foodItemData.name3,
+    servings,
+  };
 };

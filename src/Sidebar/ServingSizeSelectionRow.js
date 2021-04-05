@@ -6,7 +6,7 @@ import { CloseOutlined } from "@ant-design/icons";
 
 import {
   selectedQuantityState,
-  selectedWeightIndexState,
+  selectedWeightState,
 } from "../recoil/foodItemDataState";
 
 import _ from "lodash";
@@ -22,19 +22,15 @@ function ServingSizeSelectionRow({ foodItemData }) {
   const [selectedQuantity, setSelectedQuantity] = useRecoilState(
     selectedQuantityState
   );
-  const [selectedWeightIndex, setSelectedWeightIndex] = useRecoilState(
-    selectedWeightIndexState
+  const [selectedWeight, setSelectedWeight] = useRecoilState(
+    selectedWeightState
   );
 
-  const servings = _.values(JSON.parse(foodItemData.servingsizes)).map(
-    ([weight, description]) => `${description} (${weight}g)`
-  );
+  const servings = _.entries(foodItemData.servings);
 
-  const selectedWeight = servings[selectedWeightIndex];
-
-  const renderServing = (serving, index) => (
-    <Option value={index} key={serving}>
-      {serving}
+  const renderServing = ([servingKey, { description }]) => (
+    <Option value={servingKey} key={servingKey}>
+      {description}
     </Option>
   );
 
@@ -67,7 +63,7 @@ function ServingSizeSelectionRow({ foodItemData }) {
           className="serving-size-selection-row__select"
           style={{ width: "100%" }}
           dropdownMatchSelectWidth={false}
-          onChange={setSelectedWeightIndex}
+          onChange={setSelectedWeight}
         >
           {servings.map(renderServing)}
         </Select>

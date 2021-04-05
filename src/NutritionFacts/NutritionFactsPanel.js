@@ -8,15 +8,20 @@ import NutritionFactsHistogram from "./NutritionFactsHistogram";
 import { isMobileState } from "../hooks/useIsMobile";
 import { displayDrawerState } from "../recoil/displayDrawerState";
 import { foodItemDataState } from "../recoil/foodItemDataState";
+import useQueryChangedEffects from "../hooks/useQueryChangedEffects";
 
 import "./NutritionFactsPanel.scss";
 import Sidebar from "../Sidebar/Sidebar";
 import ServingSizeSelectionRow from "../Sidebar/ServingSizeSelectionRow";
 
 export default function NutritionFactsPanel({ className }) {
+  useQueryChangedEffects();
+
   const foodItemData = useRecoilValue(foodItemDataState);
   const [displayDrawer, setDisplayDrawer] = useRecoilState(displayDrawerState);
   const isMobile = useRecoilValue(isMobileState);
+
+  if (!foodItemData) return null;
 
   const MobileHeader = () =>
     isMobile && (
@@ -60,11 +65,13 @@ export default function NutritionFactsPanel({ className }) {
       <MobileHeader />
 
       <h1 className="facts-panel-header">{foodItemData.name}</h1>
-      <div className="facts-panel-subheader">{foodItemData.food_description}</div>
+      <div className="facts-panel-subheader">
+        {foodItemData.food_description}
+      </div>
 
       <div>
         <strong>Database: </strong>
-        {foodItemData.datatype}
+        {foodItemData.data_db_name}
       </div>
 
       <div>

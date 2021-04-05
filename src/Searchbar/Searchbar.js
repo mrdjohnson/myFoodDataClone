@@ -1,8 +1,7 @@
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 
 import { Select } from "antd";
-
-import useSetFoodItemDataName from "../hooks/useSetFoodItemDataName";
 
 import Axios from "axios";
 import _ from "lodash";
@@ -14,14 +13,13 @@ const { Option } = Select;
 function Searchbar({ placeholder = "🔍 Find Another Food" }) {
   const [searchValue, setSearchValue] = useState();
   const [foodItems, setFoodItems] = useState([]);
-
-  const setFoodItemDataName = useSetFoodItemDataName();
+  const history = useHistory();
 
   const searchFoodItems = _.debounce((foodSearchString) => {
     setFoodItems([]);
 
     if (_.isEmpty(foodSearchString)) {
-      setSearchValue(undefined);
+      setSearchValue(null);
       return;
     }
 
@@ -38,12 +36,8 @@ function Searchbar({ placeholder = "🔍 Find Another Food" }) {
   function updateSearchedValue(searchedFoodItem) {
     console.log("selected: ", searchedFoodItem);
 
-    if (_.isEmpty(searchedFoodItem)) {
-      setSearchValue(undefined);
-    } else {
-      setSearchValue(searchedFoodItem);
-      setFoodItemDataName(searchedFoodItem);
-    }
+    setSearchValue(null);
+    history.push(`/nutrition-facts/${searchedFoodItem}`);
   }
 
   const renderHighlightedFoodItem = (foodItem) => {

@@ -1,15 +1,14 @@
 import React from "react";
-import { useRecoilValue } from "recoil";
 import { Layout } from "antd";
+import { Route, Switch } from "react-router";
 
 import Sidebar from "./Sidebar/Sidebar";
 import NutritionFactsPanel from "./NutritionFacts/NutritionFactsPanel";
 import HomePage from "./HomePage";
 
 import useIsMobile from "./hooks/useIsMobile";
-import { foodItemDataState } from "./recoil/foodItemDataState";
 
-import useAppEffects from "./hooks/useAppEffects";
+import useUrlEffects from "./hooks/useUrlEffects";
 
 import logo from "./assets/logo.svg";
 
@@ -18,12 +17,10 @@ import "./App.scss";
 const { Header, Content, Footer } = Layout;
 
 function App() {
-  useAppEffects();
+  useUrlEffects();
 
-  const foodItemData = useRecoilValue(foodItemDataState);
   const isMobile = useIsMobile();
-  const displayHomePage = !foodItemData;
-  const displaySider = !isMobile;
+  const displaySidebar = !isMobile;
 
   const AppFooter = () => (
     <>
@@ -40,21 +37,6 @@ function App() {
     </>
   );
 
-  const FoodItemDataPanel = () => (
-    <>
-      {displaySider && <Sidebar className="ant-layout-content__sidebar" />}
-
-      <NutritionFactsPanel className="ant-layout-content__nutrition-facts-panel" />
-    </>
-  );
-
-  const AppBody = () =>
-    displayHomePage ? (
-      <HomePage className="ant-layout-content__home-page" />
-    ) : (
-      <FoodItemDataPanel />
-    );
-
   return (
     <Layout className={isMobile && "mobile"} style={{ minHeight: "100vh" }}>
       <Header className="header">
@@ -69,7 +51,20 @@ function App() {
       </Header>
 
       <Content>
-        <AppBody />
+        <Switch>
+          <Route path="/nutrition-facts/:foodName/:weight?/:quantity?">
+            {displaySidebar && (
+              <Sidebar className="ant-layout-content__sidebar" />
+            )}
+
+            <NutritionFactsPanel className="ant-layout-content__nutrition-facts-panel" />
+          </Route>
+
+          {/* default route */}
+          <Route>
+            <HomePage className="ant-layout-content__home-page" />
+          </Route>
+        </Switch>
       </Content>
 
       <Footer className="app-footer">
