@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useFoodItemDataStore } from "../hooks/useStore";
 
 import { Select } from "antd";
 
@@ -13,7 +13,7 @@ const { Option } = Select;
 function Searchbar({ placeholder = "🔍 Find Another Food" }) {
   const [searchValue, setSearchValue] = useState();
   const [foodItems, setFoodItems] = useState([]);
-  const history = useHistory();
+  const foodItemDataStore = useFoodItemDataStore();
 
   const searchFoodItems = _.debounce((foodSearchString) => {
     setFoodItems([]);
@@ -37,7 +37,10 @@ function Searchbar({ placeholder = "🔍 Find Another Food" }) {
     console.log("selected: ", searchedFoodItem);
 
     setSearchValue(null);
-    history.push(`/nutrition-facts/${searchedFoodItem}`);
+
+    if (searchedFoodItem) {
+      foodItemDataStore.setFoodItemDataFromName(searchedFoodItem)
+    }
   }
 
   const renderHighlightedFoodItem = (foodItem) => {

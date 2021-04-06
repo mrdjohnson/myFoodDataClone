@@ -1,24 +1,24 @@
 import React from "react";
-import { useResetRecoilState } from "recoil";
-
 import { Card, Tooltip, Button } from "antd";
 import { CloseOutlined } from "@ant-design/icons";
 
-import ServingSizeSelectionRow from "./ServingSizeSelectionRow";
+import { useFoodItemDataStore } from "../hooks/useStore";
 
-import { foodItemDataState } from "../recoil/foodItemDataState";
+import ServingSizeSelectionRow from "./ServingSizeSelectionRow";
 
 import "./SidebarFoodCard.scss";
 
 function SidebarFoodCard({ foodItemData }) {
-  const resetFoodItemData = useResetRecoilState(foodItemDataState);
+  const { removeFoodItemData } = useFoodItemDataStore();
+
+  const remove = () => removeFoodItemData(foodItemData);
 
   const closeButton = (
     <Tooltip title="close">
       <Button
         type="link"
         icon={<CloseOutlined />}
-        onClick={resetFoodItemData}
+        onClick={remove}
         className="sidebar-food-card__close-button"
       />
     </Tooltip>

@@ -1,25 +1,36 @@
-import React from "react";
-import { useRecoilValue, useRecoilState } from "recoil";
+import React, { useEffect, useState } from "react";
+import { useRouteMatch } from "react-router-dom";
+import { observer } from "mobx-react";
 
 import NutritionFactsTable from "./NutritionFactsTable";
 import { Row, Drawer, Button } from "antd";
 import NutritionFactsHistogram from "./NutritionFactsHistogram";
 
-import { isMobileState } from "../hooks/useIsMobile";
-import { displayDrawerState } from "../recoil/displayDrawerState";
-import { foodItemDataState } from "../recoil/foodItemDataState";
-import useQueryChangedEffects from "../hooks/useQueryChangedEffects";
+import useIsMobile from "../hooks/useIsMobile";
+
+import { useFoodItemDataStore } from "../hooks/useStore";
 
 import "./NutritionFactsPanel.scss";
 import Sidebar from "../Sidebar/Sidebar";
 import ServingSizeSelectionRow from "../Sidebar/ServingSizeSelectionRow";
 
-export default function NutritionFactsPanel({ className }) {
-  useQueryChangedEffects();
+function NutritionFactsPanel({ className }) {
+  const {
+    params: { foodName, weight, quantity },
+  } = useRouteMatch();
 
-  const foodItemData = useRecoilValue(foodItemDataState);
-  const [displayDrawer, setDisplayDrawer] = useRecoilState(displayDrawerState);
-  const isMobile = useRecoilValue(isMobileState);
+  const foodItemDataStore = useFoodItemDataStore();
+
+  const { foodItemData } = foodItemDataStore;
+
+  const [displayDrawer, setDisplayDrawer] = useState(false);
+  const isMobile = useIsMobile();
+
+  useEffect(() => {
+    foodItemDataStore.setFoodItemDataFromName(foodName, quantity, weight);
+
+    setDisplayDrawer(false);
+  }, [foodName]);
 
   if (!foodItemData) return null;
 
@@ -77,10 +88,12 @@ export default function NutritionFactsPanel({ className }) {
       <div>
         <MobileServingSizeSelector />
         <Row align="middle" className="facts-panel-body">
-          <NutritionFactsTable />
-          <NutritionFactsHistogram />
+          <NutritionFactsTable foodItemData={foodItemData} />
+          <NutritionFactsHistogram foodItemData={foodItemData} />
         </Row>
       </div>
     </div>
   );
 }
+
+export default observer(NutritionFactsPanel);

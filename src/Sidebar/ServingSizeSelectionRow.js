@@ -1,13 +1,8 @@
 import React from "react";
-import { useRecoilState } from "recoil";
+import { observer } from "mobx-react";
 
 import { InputNumber, Row, Col, Select } from "antd";
 import { CloseOutlined } from "@ant-design/icons";
-
-import {
-  selectedQuantityState,
-  selectedWeightState,
-} from "../recoil/foodItemDataState";
 
 import _ from "lodash";
 
@@ -19,13 +14,6 @@ const MIN_QUANTITY = 1;
 const MAX_QUANTITY = 10000;
 
 function ServingSizeSelectionRow({ foodItemData }) {
-  const [selectedQuantity, setSelectedQuantity] = useRecoilState(
-    selectedQuantityState
-  );
-  const [selectedWeight, setSelectedWeight] = useRecoilState(
-    selectedWeightState
-  );
-
   const servings = _.entries(foodItemData.servings);
 
   const renderServing = ([servingKey, { description }]) => (
@@ -36,7 +24,7 @@ function ServingSizeSelectionRow({ foodItemData }) {
 
   const updateSelectedQuantity = (selectedQuantity) => {
     if (MIN_QUANTITY <= selectedQuantity && selectedQuantity < MAX_QUANTITY) {
-      setSelectedQuantity(selectedQuantity);
+      foodItemData.setSelectedQuantity(selectedQuantity);
     }
   };
 
@@ -46,7 +34,7 @@ function ServingSizeSelectionRow({ foodItemData }) {
         <InputNumber
           min={MIN_QUANTITY}
           max={MAX_QUANTITY}
-          value={selectedQuantity}
+          value={foodItemData.selectedQuantity}
           placeholder={1}
           onChange={updateSelectedQuantity}
           className="serving-size-selection-row__serving-input"
@@ -59,11 +47,11 @@ function ServingSizeSelectionRow({ foodItemData }) {
 
       <Col span={18}>
         <Select
-          value={selectedWeight}
+          value={foodItemData.selectedWeight}
           className="serving-size-selection-row__select"
           style={{ width: "100%" }}
           dropdownMatchSelectWidth={false}
-          onChange={setSelectedWeight}
+          onChange={foodItemData.setSelectedWeight}
         >
           {servings.map(renderServing)}
         </Select>
@@ -72,4 +60,4 @@ function ServingSizeSelectionRow({ foodItemData }) {
   );
 }
 
-export default ServingSizeSelectionRow;
+export default observer(ServingSizeSelectionRow);
