@@ -1,17 +1,15 @@
 import React from "react";
-import { useRecoilValue } from "recoil";
+import { observer } from "mobx-react";
 
 import { Row } from "antd";
-import { foodItemDataNutritionFactsState } from "../recoil/foodItemDataState";
 
 import "./NutritionFactsTable.scss";
 
-function NutritionFactsTable() {
-  const foodItemDataNutritionFacts = useRecoilValue(
-    foodItemDataNutritionFactsState
-  );
+function NutritionFactsTable({ foodItemData }) {
+  const foodItemDataNutritionFacts = foodItemData.nutritionFacts;
 
   if (!foodItemDataNutritionFacts) return null;
+
   const {
     calories,
     totalFat,
@@ -30,7 +28,7 @@ function NutritionFactsTable() {
     calcium,
     potassium,
     phosphorus,
-    servingDescription
+    servingDescription,
   } = foodItemDataNutritionFacts;
 
   const AddedSugar = () => {
@@ -171,4 +169,4 @@ function NutritionFactsTable() {
   );
 }
 
-export default NutritionFactsTable;
+export default observer(NutritionFactsTable);

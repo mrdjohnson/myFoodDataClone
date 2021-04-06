@@ -48,7 +48,7 @@ function nutritionFactsFromFoodData(foodItemData) {
   };
 }
 
-function validQuantity(quantity) {
+export function validQuantity(quantity) {
   if (quantity >= MIN_QUANTITY && quantity <= MAX_QUANTITY) {
     return quantity;
   }
@@ -56,8 +56,10 @@ function validQuantity(quantity) {
   return MIN_QUANTITY;
 }
 
-function validServingWeight(foodItemData, servingWeight) {
-  return _.has(foodItemData.servings, servingWeight) ? servingWeight : "wt1";
+export function validServingWeight(foodItemData, servingWeight) {
+  if (foodItemData.servings[servingWeight]) return servingWeight;
+
+  return _.first(_.keys(foodItemData.servings));
 }
 
 export function validQuantityWeightFromQueryParams(

@@ -1,16 +1,32 @@
-import React from "react";
+import React, { useEffect } from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
-import { BrowserRouter } from "react-router-dom";
-import { RecoilRoot } from "recoil";
+import { BrowserRouter, useHistory } from "react-router-dom";
+import { Provider } from "mobx-react";
+import { RootStoreModel } from "./models/RootStoreModel";
+
+const rootStore = RootStoreModel.create({});
+
+const AppWithRootStore = () => {
+  const history = useHistory();
+
+  // hacky work around because mobx-react-router does not work well with mobx-state-tree
+  useEffect(() => {
+    rootStore.setRouter(history);
+  }, []);
+
+  return (
+    <Provider {...rootStore}>
+      <App />
+    </Provider>
+  );
+};
 
 ReactDOM.render(
   <BrowserRouter basename="myFoodDataClone">
-    <RecoilRoot>
-      <App />
-    </RecoilRoot>
+    <AppWithRootStore />
   </BrowserRouter>,
   document.getElementById("root")
 );

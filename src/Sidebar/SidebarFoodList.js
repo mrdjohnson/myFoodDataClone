@@ -1,15 +1,15 @@
 import React from "react";
-import { useRecoilValue } from "recoil"
+import { observer } from "mobx-react";
 
 import { List } from "antd";
 import SidebarFoodCard from "./SidebarFoodCard";
 
-import { foodItemDataState } from "../recoil/foodItemDataState";
+import { useFoodItemDataStore } from "../hooks/useStore";
 
 function SideBarFoodList() {
-  const foodItemData = useRecoilValue(foodItemDataState);
+  const { foodItemDatas } = useFoodItemDataStore();
 
-  if (!foodItemData) return null;
+  if (foodItemDatas.length === 0) return null;
 
   const renderListItem = (item) => (
     <List.Item key={item.name}>
@@ -17,11 +17,7 @@ function SideBarFoodList() {
     </List.Item>
   );
 
-  return (
-    foodItemData && (
-      <List dataSource={[foodItemData]} renderItem={renderListItem} />
-    )
-  );
+  return <List dataSource={foodItemDatas} renderItem={renderListItem} />;
 }
 
-export default SideBarFoodList;
+export default observer(SideBarFoodList);

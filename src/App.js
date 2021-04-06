@@ -8,8 +8,6 @@ import HomePage from "./HomePage";
 
 import useIsMobile from "./hooks/useIsMobile";
 
-import useUrlEffects from "./hooks/useUrlEffects";
-
 import logo from "./assets/logo.svg";
 
 import "./App.scss";
@@ -17,8 +15,6 @@ import "./App.scss";
 const { Header, Content, Footer } = Layout;
 
 function App() {
-  useUrlEffects();
-
   const isMobile = useIsMobile();
   const displaySidebar = !isMobile;
 

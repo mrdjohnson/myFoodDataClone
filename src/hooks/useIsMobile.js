@@ -1,15 +1,11 @@
-import { useEffect } from "react";
-import { atom, useRecoilState } from "recoil";
+import { useEffect, useState } from "react";
 
 const MOBILE_BREAKPOINT = 768;
 
-export const isMobileState = atom({
-  key: "isMobileState",
-  default: window.innerWidth < MOBILE_BREAKPOINT,
-});
-
 export default function useIsMobile() {
-  const [isMobile, setIsMobile] = useRecoilState(isMobileState);
+  const [isMobile, setIsMobile] = useState(
+    window.innerWidth < MOBILE_BREAKPOINT
+  );
 
   // run on mount only
   useEffect(() => {
