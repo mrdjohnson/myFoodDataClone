@@ -3,10 +3,9 @@
   flex-direction: column;
   align-items: center;
 
-  .ant-select-selector {
-    border: 1px solid #3baae1 !important;
-    background: #f0f1f0 !important;
-    max-width: 500px !important;
+  .searchbar-container {
+    max-width: 500px;
+    width: 100%;
   }
 }
 

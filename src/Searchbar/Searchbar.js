@@ -49,20 +49,22 @@ function Searchbar({ placeholder = "🔍 Find Another Food" }) {
   };
 
   return (
-    <Select
-      allowClear
-      showSearch
-      showArrow={false}
-      value={searchValue}
-      placeholder={placeholder}
-      notFoundContent={false}
-      filterOption={false}
-      onSearch={searchFoodItems}
-      onChange={updateSearchedValue}
-      className="searchbar"
-    >
-      {foodItems.map(renderHighlightedFoodItem)}
-    </Select>
+    <div className="select-container">
+      <Select
+        allowClear
+        showSearch
+        showArrow={false}
+        value={searchValue}
+        placeholder={placeholder}
+        notFoundContent={false}
+        filterOption={false}
+        onSearch={searchFoodItems}
+        onChange={updateSearchedValue}
+        className="searchbar"
+      >
+        {foodItems.map(renderHighlightedFoodItem)}
+      </Select>
+    </div>
   );
 }
 

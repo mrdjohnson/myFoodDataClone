@@ -11,7 +11,9 @@ export default function HomePage({ className }) {
       <div class="home-info-how-to-search-line">
         Use the search box to find a food and see the nutrient details.
       </div>
-      <Searchbar placeholder="🔍 Search For A Food (Apples)" />
+      <div className="searchbar-container">
+        <Searchbar placeholder="🔍 Search For A Food (Apples)" />
+      </div>
     </div>
   );
 }
