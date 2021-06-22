@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useMemo } from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
@@ -18,7 +18,7 @@ const AppWithRootStore = () => {
   }, []);
 
   return (
-    <Provider {...rootStore}>
+    <Provider store={rootStore}>
       <App />
     </Provider>
   );
