@@ -1,0 +1,10 @@
+const path = require("path");
+module.exports = {
+  webpack: {
+    alias: {
+      '@models': path.resolve(__dirname, "src/models/"),
+      '@util': path.resolve(__dirname, "src/util/"),
+      '@hooks': path.resolve(__dirname, "src/hooks/"),
+    }
+  }
+}
