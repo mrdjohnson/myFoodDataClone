@@ -1,6 +1,6 @@
 import { types } from "mobx-state-tree";
 
-import { FoodItemDataStoreModel } from "./FoodItemDataStoreModel";
+import { FoodItemDataStoreModel } from "@models/FoodItemDataStoreModel";
 
 export const RootStoreModel = types
   .model("RootStore", {

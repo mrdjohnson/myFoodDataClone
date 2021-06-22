@@ -1,7 +1,7 @@
 import Axios from "axios";
 import { types, flow, getRoot } from "mobx-state-tree";
 
-import { FoodItemDataModel } from "./FoodItemDataModel";
+import { FoodItemDataModel } from "@models/FoodItemDataModel";
 
 export const FoodItemDataStoreModel = types
   .model("FoodItemDataStore", {

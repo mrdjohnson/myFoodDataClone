@@ -5,7 +5,7 @@ import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import { BrowserRouter, useHistory } from "react-router-dom";
 import { Provider } from "mobx-react";
-import { RootStoreModel } from "./models/RootStoreModel";
+import { RootStoreModel } from "@models/RootStoreModel";
 
 const rootStore = RootStoreModel.create({});
 
