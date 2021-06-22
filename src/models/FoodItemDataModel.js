@@ -5,7 +5,7 @@ import {
   calculateNutritionalFactTable,
   validServingWeight,
   validQuantity,
-} from "../util/format_food_item_data";
+} from "@util/format_food_item_data";
 
 const NumberOrNullType = types.maybeNull(types.number);
 
