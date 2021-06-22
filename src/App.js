@@ -6,7 +6,7 @@ import Sidebar from "./Sidebar/Sidebar";
 import NutritionFactsPanel from "./NutritionFacts/NutritionFactsPanel";
 import HomePage from "./HomePage";
 
-import useIsMobile from "./hooks/useIsMobile";
+import useIsMobile from "@hooks/useIsMobile";
 
 import logo from "./assets/logo.svg";
 

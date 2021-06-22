@@ -4,7 +4,7 @@ import { observer } from "mobx-react";
 import { List } from "antd";
 import SidebarFoodCard from "./SidebarFoodCard";
 
-import { useFoodItemDataStore } from "../hooks/useStore";
+import { useFoodItemDataStore } from "@hooks/useStore";
 
 function SideBarFoodList() {
   const { foodItemDatas } = useFoodItemDataStore();

@@ -2,7 +2,7 @@ import React from "react";
 import { Card, Tooltip, Button } from "antd";
 import { CloseOutlined } from "@ant-design/icons";
 
-import { useFoodItemDataStore } from "../hooks/useStore";
+import { useFoodItemDataStore } from "@hooks/useStore";
 
 import ServingSizeSelectionRow from "./ServingSizeSelectionRow";
 

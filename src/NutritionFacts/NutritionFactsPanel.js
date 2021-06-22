@@ -6,9 +6,9 @@ import NutritionFactsTable from "./NutritionFactsTable";
 import { Row, Drawer, Button } from "antd";
 import NutritionFactsHistogram from "./NutritionFactsHistogram";
 
-import useIsMobile from "../hooks/useIsMobile";
+import useIsMobile from "@hooks/useIsMobile";
 
-import { useFoodItemDataStore } from "../hooks/useStore";
+import { useFoodItemDataStore } from "@hooks/useStore";
 
 import "./NutritionFactsPanel.scss";
 import Sidebar from "../Sidebar/Sidebar";

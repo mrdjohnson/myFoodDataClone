@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useFoodItemDataStore } from "../hooks/useStore";
+import { useFoodItemDataStore } from "@hooks/useStore";
 
 import { Select } from "antd";
 
